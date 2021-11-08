@@ -4,16 +4,16 @@ using MongoDB.Driver;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TVSeriesAPI.Services 
+namespace TVSeriesAPI.Services
 {
-    public class SeriesService
+    public class TVSeriesService
     {
         private readonly IMongoCollection<Series> _series;
 
-        public SeriesService(ISeriesDatabaseSettings settings)
+        public TVSeriesService(ISeriesDatabaseSettings settings)
         {
-            var client = new MongoClient( settings.ConnectionString );
-            var database = client.GetDatabase( settings.DatabaseName );
+            var client = new MongoClient(  settings.ConnectionString );
+            var database = client.GetDatabase(  settings.DatabaseName );
             _series = database.GetCollection<Series>( settings.SeriesCollectionName );
         }
 

@@ -1,9 +1,13 @@
 import React from 'react';
+import Routing from './routing/Routing';
 
 function App() {
 	return (
-		<div className="App">
-			<h1>Hei</h1>
+		<div>
+			<header>
+				<h1>Serier</h1>
+				<Routing />
+			</header>
 		</div>
 	);
 }
