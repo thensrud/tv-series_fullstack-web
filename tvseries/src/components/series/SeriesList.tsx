@@ -21,7 +21,7 @@ const SeriesList: FC = () => {
 				<SeriesItem
 					key={key}
 					id={series.id}
-					name={series.image}
+					name={series.name}
 					image={series.image}
 				/>
 			);

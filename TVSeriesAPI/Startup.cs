@@ -11,6 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using TVSeriesAPI.DatabaseSettings;
+using TVSeriesAPI.Models;
+using TVSeriesAPI.Services;
+using Microsoft.Extensions.Options;
 
 namespace TVSeriesAPI
 {
@@ -26,6 +30,27 @@ namespace TVSeriesAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<SeriesDatabaseSettings>(
+                Configuration.GetSection(nameof(SeriesDatabaseSettings))
+            );
+
+            services.AddSingleton<ISeriesDatabaseSettings>(
+                sp => 
+                    sp.GetRequiredService<IOptions<SeriesDatabaseSettings>>().Value
+            );
+
+            services.AddSingleton<TVSeriesService>();
+
+            services.AddCors(
+                options => {
+                    options.AddPolicy("AllowAll", 
+                        builder => builder
+                            .AllowAnyOrigin()
+                            .AllowAnyHeader()
+                            .AllowAnyMethod()  
+                    );
+                }
+            );
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -43,6 +68,10 @@ namespace TVSeriesAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TVSeriesAPI v1"));
             }
+
+            app.UseCors("AllowAll");
+
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 
