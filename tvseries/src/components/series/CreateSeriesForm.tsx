@@ -27,8 +27,6 @@ const CreateSeriesForm: FC = () => {
 	};
 
 	const postNewSeries = () => {
-		// console.log(newSeries);
-		// console.log(newImage);
 		seriesService.postSeries(newSeries, newImage as File);
 	};
 

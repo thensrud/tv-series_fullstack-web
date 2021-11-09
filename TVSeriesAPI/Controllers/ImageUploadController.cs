@@ -22,7 +22,7 @@ namespace TVSeriesAPI.Controllers
         public ActionResult SaveImage(IFormFile file) // kan være bra å sjekke om det faktisk er et bilde
         {
             string webRootPath = _hosting.WebRootPath;
-            // ikke anbefalt å bruke originale bildenavn, bør gjøre noe endring, se slideserie
+            // ikke anbefalt å bruke originale bildenavn, bør gjøre noe endring
             string absolutePath = Path.Combine($"{webRootPath}/images/{file.FileName}");
 
             try 
