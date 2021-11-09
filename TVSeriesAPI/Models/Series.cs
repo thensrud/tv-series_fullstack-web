@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 // using TVSeriesAPI.Interfaces;
@@ -13,21 +14,12 @@ namespace TVSeriesAPI.Models
         public string Image { get; set; }
         public string Genre { get; set; }
         public string Plot { get; set; }
-        public Seasons[] Seasons { get; set; }
+        public List<Season> Seasons { get; set; }
     }
 
-    public class Seasons // : ISeasons
+    public class Season
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
         public string SeasonNumber { get; set; }
-        public Episodes[] Episodes { get; set; }
-    }
-
-    public class Episodes // : IEpisodes
-    {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string[] Episode { get; set; }
+        public List<string> Episodes { get; set; }
     }
 }
