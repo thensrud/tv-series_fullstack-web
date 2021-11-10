@@ -15,10 +15,10 @@ namespace TVSeriesAPI.Models
     public string Image { get; set; }
     public string Genre { get; set; }
     public string Plot { get; set; }
-    public List<Seasons> Seasons { get; set; }
+    public List<ISeasons> Seasons { get; set; }
   }
 
-  public class Seasons
+  public class ISeasons
   {
     public string SeasonNumber { get; set; }
     public List<string> Episodes { get; set; }

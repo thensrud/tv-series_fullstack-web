@@ -1,36 +1,36 @@
-import { FC, useEffect, useState } from "react";
-import { seriesService } from "../../services/seriesService";
-import { ISeries } from "../../interfaces/ISeries";
-import SeriesItem from "./SeriesItem";
+import { FC, useEffect, useState } from 'react';
+import { seriesService } from '../../services/seriesService';
+import { ISeries } from '../../interfaces/ISeries';
+import SeriesItem from './SeriesItem';
 
 const SeriesList: FC = () => {
-  const [series, setSeries] = useState<ISeries[]>();
+	const [series, setSeries] = useState<ISeries[]>();
 
-  useEffect(() => {
-    getAllSeries();
-  }, []);
+	useEffect(() => {
+		getAllSeries();
+	}, []);
 
-  const getAllSeries = async () => {
-    const result = await seriesService.getAllSeries();
-    setSeries(result);
-  };
+	const getAllSeries = async () => {
+		const result = await seriesService.getAllSeries();
+		setSeries(result);
+	};
 
-  const createSeriesList = () => {
-    return series?.map((series: ISeries, key: number) => {
-      return (
-        <SeriesItem
-          key={key}
-          id={series.id}
-          name={series.name}
-          image={series.image}
-          genre={series.genre}
-          plot={series.plot}
-        />
-      );
-    });
-  };
+	const createSeriesList = () => {
+		return series?.map((series: ISeries, key: number) => {
+			return (
+				<SeriesItem
+					key={key}
+					id={series.id}
+					name={series.name}
+					image={series.image}
+					genre={series.genre}
+					plot={series.plot}
+				/>
+			);
+		});
+	};
 
-  return <section>{createSeriesList()}</section>;
+	return <section>{createSeriesList()}</section>;
 };
 
 export default SeriesList;
