@@ -4971,19 +4971,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/thorstein/.nuget/packages/": {}
+    "/Users/sarahvandijk/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/thorstein/Documents/Høyskolen_Kristiania/web3/tv-series-fullstack/TVSeriesAPI/TVSeriesAPI.csproj",
+      "projectUniqueName": "/Users/sarahvandijk/HK/Semester_5/PGR305_Webutvikling_3/Eksamen/tv-series_fullstack-web/TVSeriesAPI/TVSeriesAPI.csproj",
       "projectName": "TVSeriesAPI",
-      "projectPath": "/Users/thorstein/Documents/Høyskolen_Kristiania/web3/tv-series-fullstack/TVSeriesAPI/TVSeriesAPI.csproj",
-      "packagesPath": "/Users/thorstein/.nuget/packages/",
-      "outputPath": "/Users/thorstein/Documents/Høyskolen_Kristiania/web3/tv-series-fullstack/TVSeriesAPI/obj/",
+      "projectPath": "/Users/sarahvandijk/HK/Semester_5/PGR305_Webutvikling_3/Eksamen/tv-series_fullstack-web/TVSeriesAPI/TVSeriesAPI.csproj",
+      "packagesPath": "/Users/sarahvandijk/.nuget/packages/",
+      "outputPath": "/Users/sarahvandijk/HK/Semester_5/PGR305_Webutvikling_3/Eksamen/tv-series_fullstack-web/TVSeriesAPI/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/thorstein/.nuget/NuGet/NuGet.Config"
+        "/Users/sarahvandijk/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
