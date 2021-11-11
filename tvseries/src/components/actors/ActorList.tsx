@@ -1,4 +1,5 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
 import { IActors } from '../../interfaces/IActors';
 import { actorsService } from '../../services/actorsService';
 import ActorItem from './ActorItem';
@@ -18,19 +19,21 @@ const ActorList: FC = () => {
 	const createActorList = () => {
 		return actor?.map((actor: IActors, key: number) => {
 			return (
-				<ActorItem
-					key={key}
-					name={actor.name}
-					image={actor.image}
-					age={actor.age}
-					country={actor.country}
-					inSeries={actor.inSeries}
-				/>
+				<Col className="pt-4" md={6} lg={4} xl={3} key={key}>
+					<ActorItem
+						key={key}
+						name={actor.name}
+						image={actor.image}
+						age={actor.age}
+						country={actor.country}
+						inSeries={actor.inSeries}
+					/>
+				</Col>
 			);
 		});
 	};
 
-	return <section>{createActorList()}</section>;
+	return <Row>{createActorList()}</Row>;
 };
 
 export default ActorList;
