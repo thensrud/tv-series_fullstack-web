@@ -1,8 +1,8 @@
-import { FC, ChangeEvent, useState } from "react";
+/* import { FC, ChangeEvent, useState } from "react";
 import { seriesService } from "../../services/seriesService";
 import { ISeries } from "../../interfaces/ISeries";
 
-const CreateSeriesForm: FC = () => {
+const CreateActorForm: FC = () => {
   const [newSeries, setNewSeries] = useState<ISeries>({
     name: "",
     image: "",
@@ -53,7 +53,7 @@ const CreateSeriesForm: FC = () => {
   return (
     <section>
       <div>
-        <label>Name</label>
+        <label>Navn</label>
         <input
           onChange={handleChange}
           name="name"
@@ -62,11 +62,11 @@ const CreateSeriesForm: FC = () => {
         />
       </div>
       <div>
-        <label>Choose Picture</label>
+        <label>Velg bilde</label>
         <input onChange={handleChange} name="image" type="file" />
       </div>
       <div>
-        <label>Genre(s)</label>
+        <label>Sjanger(e)</label>
         <input
           onChange={handleChange}
           name="genre"
@@ -84,7 +84,7 @@ const CreateSeriesForm: FC = () => {
         />
       </div>
       <div>
-        <label>Seasons</label>
+        <label>Season</label>
         <input
           onChange={handleChange}
           name="seasonNumber"
@@ -98,4 +98,7 @@ const CreateSeriesForm: FC = () => {
   );
 };
 
-export default CreateSeriesForm;
+export default CreateActorForm;
+ */
+
+export default {};

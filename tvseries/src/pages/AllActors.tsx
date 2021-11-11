@@ -1,10 +1,10 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import ActorList from "../components/actors/ActorList";
 
 const AllActors: FC = () => {
   return (
-    <section>
-      <h3>Alle skuespillere</h3>
+    <section className="section">
+      <h3 className="page-title mb-4">All Actors</h3>
       <ActorList />
     </section>
   );

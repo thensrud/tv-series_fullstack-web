@@ -24,6 +24,7 @@ const ActorList: FC = () => {
           image={actor.image}
           age={actor.age}
           country={actor.country}
+          inSeries={actor.inSeries}
         />
       );
     });
