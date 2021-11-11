@@ -3,8 +3,8 @@ import SeriesList from '../components/series/SeriesList';
 
 const AllSeries: FC = () => {
 	return (
-		<section>
-			<h3>Alle serier</h3>
+		<section className="section">
+			<h3 className="page-title mb-4">Alle serier</h3>
 			<SeriesList />
 		</section>
 	);

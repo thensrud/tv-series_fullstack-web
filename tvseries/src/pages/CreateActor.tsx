@@ -3,8 +3,8 @@ import CreateActorForm from '../components/actors/CreateActorForm';
 
 const CreateActor: FC = () => {
 	return (
-		<section>
-			<h3>Save new actor</h3>
+		<section className="section">
+			<h3 className="page-title mb-4">Save new actor</h3>
 			<CreateActorForm />
 		</section>
 	);

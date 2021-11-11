@@ -2,8 +2,8 @@ import { FC } from 'react';
 
 const HomePage: FC = () => {
 	return (
-		<section>
-			<h3>Home</h3>
+		<section className="section">
+			<h3 className="page-title mb-4">Home</h3>
 		</section>
 	);
 };
