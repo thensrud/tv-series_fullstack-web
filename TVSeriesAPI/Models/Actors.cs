@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-// using TVSeriesAPI.Interfaces;
+using TVSeriesAPI.Interfaces;
 
 namespace TVSeriesAPI.Models 
 {
-  // [BsonIgnoreExtraElements]
-  public class Actors //: IActors
+  public class Actors : IActors
   {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
