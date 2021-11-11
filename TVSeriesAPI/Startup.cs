@@ -39,7 +39,8 @@ namespace TVSeriesAPI
                     sp.GetRequiredService<IOptions<SeriesDatabaseSettings>>().Value
             );
 
-            services.AddSingleton<TVSeriesService>();
+            services.AddSingleton<SeriesService>();
+            services.AddSingleton<ActorsService>();
 
             services.AddCors(
                 options => {
