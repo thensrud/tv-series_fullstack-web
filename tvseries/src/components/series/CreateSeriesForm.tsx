@@ -38,9 +38,11 @@ const CreateSeriesForm: FC = () => {
 			case 'plot':
 				setNewSeries({ ...newSeries, plot: value });
 				break;
-			// case 'seasonNumber':
-			// 	setNewSeries({ ...newSeries });
-			// 	break;
+			case 'seasonNumber':
+				// let tempState = { ...newSeries.seasons };
+				// tempState[0].seasonNumber = value;
+				setNewSeries({ ...newSeries });
+				break;
 		}
 	};
 

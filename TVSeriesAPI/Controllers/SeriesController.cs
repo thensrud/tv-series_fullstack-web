@@ -10,9 +10,9 @@ namespace TVSeriesAPI.Controllers
     [Route("[controller]")]
     public class SeriesController : ControllerBase
     {
-        private readonly TVSeriesService _seriesService;
+        private readonly SeriesService _seriesService;
 
-        public SeriesController(TVSeriesService seriesService)
+        public SeriesController(SeriesService seriesService)
         {
             _seriesService = seriesService;
         }

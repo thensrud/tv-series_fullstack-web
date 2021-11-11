@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace TVSeriesAPI.Services
 {
-    public class TVSeriesService
+    public class SeriesService
     {
         private readonly IMongoCollection<Series> _series;
 
-        public TVSeriesService(ISeriesDatabaseSettings settings)
+        public SeriesService(ISeriesDatabaseSettings settings)
         {
             var client = new MongoClient(  settings.ConnectionString );
             var database = client.GetDatabase(  settings.DatabaseName );
