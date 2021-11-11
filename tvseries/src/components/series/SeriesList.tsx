@@ -19,7 +19,7 @@ const SeriesList: FC = () => {
 	const createSeriesList = () => {
 		return series?.map((series: ISeries, key: number) => {
 			return (
-				<Col className="pt-4" md={6} lg={4} xl={3} key={key}>
+				<Col className="pt-4" sm={6} md={4} lg={3} xl={2} key={key}>
 					<SeriesItem
 						key={key}
 						id={series.id}

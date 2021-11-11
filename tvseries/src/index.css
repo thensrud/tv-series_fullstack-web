@@ -15,7 +15,7 @@ code {
 .section {
 	min-height: 100vh;
 	background-color: rgb(65, 65, 89);
-	padding: 2rem;
+	padding: 1.5rem;
 }
 
 .page-title {

@@ -19,7 +19,7 @@ const ActorList: FC = () => {
 	const createActorList = () => {
 		return actor?.map((actor: IActors, key: number) => {
 			return (
-				<Col className="pt-4" md={6} lg={4} xl={3} key={key}>
+				<Col className="pt-4" sm={6} md={4} lg={3} xl={2} key={key}>
 					<ActorItem
 						key={key}
 						name={actor.name}
