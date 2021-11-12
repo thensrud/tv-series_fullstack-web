@@ -15,8 +15,8 @@ const CreateSeriesForm: FC = () => {
 		name: '',
 		image: '',
 		plot: '',
-		genre: newGenre,
-		seasons: newSeason,
+		// genre: newGenre,
+		// seasons: newSeason,
 	});
 	const [newImage, setNewImage] = useState<File>();
 

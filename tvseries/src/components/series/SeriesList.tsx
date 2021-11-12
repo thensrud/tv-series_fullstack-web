@@ -25,7 +25,7 @@ const SeriesList: FC = () => {
 						id={series.id}
 						name={series.name}
 						image={series.image}
-						genre={series.genre}
+						genres={series.genres}
 						plot={series.plot}
 					/>
 				</Col>
