@@ -16,14 +16,6 @@ const ActorItem: FC<IActors> = ({ name, image, age, country, inSeries }) => {
 	};
 
 	return (
-		// <article>
-		//  <h3>Name: {name}</h3>
-		//  <img src={`https://localhost:5001/images/${image}`} alt={name} />
-		//  <p>Age: {age}</p>
-		//  <p>Origin country: {country}</p>
-		//  {createInSeriesList()}
-		// </article>
-
 		<Card>
 			<Card.Img
 				variant="top"
@@ -38,5 +30,6 @@ const ActorItem: FC<IActors> = ({ name, image, age, country, inSeries }) => {
 			</Card.Body>
 		</Card>
 	);
+};
 
- export default ActorItem;
+export default ActorItem;
