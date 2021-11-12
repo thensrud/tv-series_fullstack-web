@@ -38,6 +38,5 @@ const ActorItem: FC<IActors> = ({ name, image, age, country, inSeries }) => {
 			</Card.Body>
 		</Card>
 	);
-};
 
-export default ActorItem;
+ export default ActorItem;
