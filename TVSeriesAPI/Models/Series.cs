@@ -12,7 +12,7 @@ namespace TVSeriesAPI.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
-        public List<Genre> Genres { get; set; }
+        public List<Genre> Genre { get; set; }
         public string Plot { get; set; }
         public List<Episode> Episodes { get; set; }
     }
