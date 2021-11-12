@@ -40,7 +40,7 @@ namespace TVSeriesAPI
             );
 
             services.AddSingleton<SeriesService>();
-            services.AddSingleton<ActorsService>();
+            services.AddSingleton<ActorService>();
 
             services.AddCors(
                 options => {

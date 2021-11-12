@@ -10,21 +10,21 @@ namespace TVSeriesAPI.Controllers
     [Route("[controller]")]
     public class ActorsController : ControllerBase
     {
-        private readonly ActorsService _actorsService;
+        private readonly ActorService _actorsService;
 
-        public ActorsController(ActorsService actorsService)
+        public ActorsController(ActorService actorsService)
         {
             _actorsService = actorsService;
         }
 
         [HttpGet]
-        public IEnumerable<Actors> Get()
+        public IEnumerable<Actor> Get()
         {
             return _actorsService.Get();
         }
 
         [HttpPost]
-        public Actors Post(Actors newActor)
+        public Actor Post(Actor newActor)
         {
             return _actorsService.Create( newActor );
         }

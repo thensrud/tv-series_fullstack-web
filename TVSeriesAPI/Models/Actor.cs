@@ -5,7 +5,7 @@ using TVSeriesAPI.Interfaces;
 
 namespace TVSeriesAPI.Models 
 {
-  public class Actors : IActors
+  public class Actor : IActor
   {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
@@ -14,6 +14,6 @@ namespace TVSeriesAPI.Models
     public string Image { get; set; }
     public string Age { get; set; }
     public string Country { get; set; }
-    public List<string> InSeries { get; set; }
+    public List<InSeries> InSeries { get; set; }
   }
 }

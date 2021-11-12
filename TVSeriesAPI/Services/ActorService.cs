@@ -6,23 +6,23 @@ using System.Linq;
 
 namespace TVSeriesAPI.Services
 {
-    public class ActorsService
+    public class ActorService
     {
-        private readonly IMongoCollection<Actors> _actors;
+        private readonly IMongoCollection<Actor> _actors;
 
-        public ActorsService(ISeriesDatabaseSettings settings)
+        public ActorService(ISeriesDatabaseSettings settings)
         {
             var client = new MongoClient(  settings.ConnectionString );
             var database = client.GetDatabase(  settings.DatabaseName );
-            _actors = database.GetCollection<Actors>( settings.ActorsCollectionName );
+            _actors = database.GetCollection<Actor>( settings.ActorsCollectionName );
         }
 
-        public List<Actors> Get()
+        public List<Actor> Get()
         {
             return _actors.Find( actors => true).ToList();
         }
 
-        public Actors Create(Actors newActor)
+        public Actor Create(Actor newActor)
         {
             _actors.InsertOne( newActor );
             return newActor;
