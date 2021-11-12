@@ -1,39 +1,31 @@
-import { FC, useEffect, useState } from 'react';
-import { seriesService } from '../../services/seriesService';
+import { FC, useContext } from 'react';
 import { ISeries } from '../../interfaces/ISeries';
 import SeriesItem from './SeriesItem';
 import { Col, Row } from 'react-bootstrap';
+import { SeriesContext } from '../../contexts/SeriesContext';
+import { SeriesContextType } from '../../types/SeriesContextType';
 
 const SeriesList: FC = () => {
-	const [series, setSeries] = useState<ISeries[]>();
+  const { series } = useContext(SeriesContext) as SeriesContextType;
 
-	useEffect(() => {
-		getAllSeries();
-	}, []);
+  const createSeriesList = () => {
+    return series?.map((serie: ISeries, key: number) => {
+      return (
+        <Col className='pt-4' sm={6} md={4} lg={3} xl={2} key={key}>
+          <SeriesItem
+            key={key}
+            id={serie.id}
+            name={serie.name}
+            image={serie.image}
+            genres={serie.genres}
+            plot={serie.plot}
+          />
+        </Col>
+      );
+    });
+  };
 
-	const getAllSeries = async () => {
-		const result = await seriesService.getAllSeries();
-		setSeries(result);
-	};
-
-	const createSeriesList = () => {
-		return series?.map((series: ISeries, key: number) => {
-			return (
-				<Col className="pt-4" sm={6} md={4} lg={3} xl={2} key={key}>
-					<SeriesItem
-						key={key}
-						id={series.id}
-						name={series.name}
-						image={series.image}
-						genres={series.genres}
-						plot={series.plot}
-					/>
-				</Col>
-			);
-		});
-	};
-
-	return <Row>{createSeriesList()}</Row>;
+  return <Row>{createSeriesList()}</Row>;
 };
 
 export default SeriesList;
