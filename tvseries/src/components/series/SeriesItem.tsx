@@ -10,7 +10,7 @@ const SeriesItem: FC<ISeries> = ({ name, image, plot, genres }) => {
 				src={`https://localhost:5001/images/${image}`}
 				alt={name}
 			/>
-			<Card.Body>
+			<Card.Body className="card">
 				<Card.Title>{name}</Card.Title>
 				<Card.Subtitle className="pb-3">{genres} </Card.Subtitle>
 				<Card.Text>{plot}</Card.Text>

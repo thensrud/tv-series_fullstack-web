@@ -23,7 +23,7 @@ const ActorItem: FC<IActors> = ({ name, image, age, country, inSeries }) => {
 				src={`https://localhost:5001/images/${image}`}
 				alt={name}
 			/>
-			<Card.Body>
+			<Card.Body className="card">
 				<Card.Title>
 					{name} ({age})
 				</Card.Title>
