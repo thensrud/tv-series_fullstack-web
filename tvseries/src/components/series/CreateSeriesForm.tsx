@@ -40,6 +40,7 @@ const CreateSeriesForm: FC = () => {
 				break;
 			case 'genre':
 				setNewGenre({ ...newGenre, name: value });
+				// alert(JSON.stringify(newSeries.genres));
 				break;
 			case 'plot':
 				setNewSeries({ ...newSeries, plot: value });
