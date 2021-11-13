@@ -8,7 +8,7 @@ namespace TVSeriesAPI.Interfaces
         string Id { get; set; }
         string Name { get; set; }
         string Image { get; set; }
-        List<Genre> Genres { get; set; }
+        List<Genre> Genre { get; set; }
         string Plot { get; set; }
         List<Episode> Episodes { get; set; }
     }
