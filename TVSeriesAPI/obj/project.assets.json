@@ -4971,19 +4971,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/thorstein/.nuget/packages/": {}
+    "C:\\Users\\Walis Lenovo\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/thorstein/Documents/Høyskolen_Kristiania/web3/tv-series-fullstack/TVSeriesAPI/TVSeriesAPI.csproj",
+      "projectUniqueName": "C:\\Users\\Walis Lenovo\\Documents\\Studier_host_2021\\webutvikling3\\eksamensrelatert\\tv-series_fullstack-web\\TVSeriesAPI\\TVSeriesAPI.csproj",
       "projectName": "TVSeriesAPI",
-      "projectPath": "/Users/thorstein/Documents/Høyskolen_Kristiania/web3/tv-series-fullstack/TVSeriesAPI/TVSeriesAPI.csproj",
-      "packagesPath": "/Users/thorstein/.nuget/packages/",
-      "outputPath": "/Users/thorstein/Documents/Høyskolen_Kristiania/web3/tv-series-fullstack/TVSeriesAPI/obj/",
+      "projectPath": "C:\\Users\\Walis Lenovo\\Documents\\Studier_host_2021\\webutvikling3\\eksamensrelatert\\tv-series_fullstack-web\\TVSeriesAPI\\TVSeriesAPI.csproj",
+      "packagesPath": "C:\\Users\\Walis Lenovo\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Walis Lenovo\\Documents\\Studier_host_2021\\webutvikling3\\eksamensrelatert\\tv-series_fullstack-web\\TVSeriesAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/thorstein/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Walis Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
@@ -5034,7 +5034,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.401/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
