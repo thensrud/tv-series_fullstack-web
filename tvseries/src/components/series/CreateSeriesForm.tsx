@@ -1,12 +1,13 @@
 import { FC, ChangeEvent, useState } from 'react';
 import { seriesService } from '../../services/seriesService';
 import { ISeries } from '../../interfaces/ISeries';
-import { Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
+import { Badge, Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
 import { IGenre } from '../../interfaces/IGenre';
 import { IEpisode } from '../../interfaces/IEpisode';
 
 const CreateSeriesForm: FC = () => {
-	const [newGenre, setNewGenre] = useState<IGenre>({ name: '' });
+	const [newGenreName, setNewGenreName] = useState('');
+	const [newGenre, setNewGenre] = useState<IGenre[]>([{ name: '' }]);
 	const [newEpisodes, setNewEpisodes] = useState<IEpisode>({
 		name: '',
 		seasonNumber: '',
@@ -16,7 +17,7 @@ const CreateSeriesForm: FC = () => {
 	const [newSeries, setNewSeries] = useState<ISeries>({
 		name: '',
 		image: '',
-		genres: [newGenre],
+		genres: newGenre,
 		plot: '',
 		episodes: [newEpisodes],
 	});
@@ -39,8 +40,7 @@ const CreateSeriesForm: FC = () => {
 				}
 				break;
 			case 'genre':
-				setNewGenre({ ...newGenre, name: value });
-				// alert(JSON.stringify(newSeries.genres));
+				setNewGenreName(value);
 				break;
 			case 'plot':
 				setNewSeries({ ...newSeries, plot: value });
@@ -52,12 +52,17 @@ const CreateSeriesForm: FC = () => {
 	};
 
 	const addNewGenre = () => {
-		setNewSeries({ ...newSeries, genres: [newGenre] });
+		setNewGenre([...newGenre, { name: newGenreName }]);
+		setNewSeries({ ...newSeries, genres: newGenre });
 	};
 
 	const listGenres = () => {
-		return newSeries.genres?.map((genre: IGenre, key: number) => {
-			return <span key={key}>{genre.name}</span>;
+		return newGenre.map((genre: IGenre, key: number) => {
+			return (
+				<Badge className="mx-1" bg="secondary" key={key}>
+					{genre.name}
+				</Badge>
+			);
 		});
 	};
 
