@@ -12,20 +12,6 @@ const ActorItem: FC<IActors> = ({
   country,
   inSeries,
 }) => {
-  /*const createInSeriesList = () => {
-    return inSeries?.map((series: IInSeries, key: number) => {
-      return (
-        <div key={key}>
-          <h5>{series}</h5>
-          {
-		  // Trenger logikk her for å hente ut bilde av riktig serie fra serie-collection, 
-          //som også linker til den seriens side. MEN dette skal være på details-siden, ikke her 
-		}
-        </div>
-      );
-    });
-  }; */
-
   return (
     <Card>
       <Card.Img
