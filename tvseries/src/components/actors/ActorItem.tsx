@@ -34,9 +34,7 @@ const ActorItem: FC<IActors> = ({
         alt={name}
       />
       <Card.Body>
-        <Card.Title>
-          {name} ({age})
-        </Card.Title>
+        <Card.Title>{name}</Card.Title>
         <Link to={`/actors-details/${id}`}>Read more about {name}</Link>
       </Card.Body>
     </Card>
