@@ -1,8 +1,8 @@
 import { useParams } from 'react-router';
 import { FC, useContext, useEffect, useState } from 'react';
-import { SeriesContext } from '../contexts/SeriesContext';
-import { SeriesContextType } from '../types/SeriesContextType';
-import { ISeries } from '../interfaces/ISeries';
+import { SeriesContext } from '../../contexts/SeriesContext';
+import { SeriesContextType } from '../../types/SeriesContextType';
+import { ISeries } from '../../interfaces/ISeries';
 
 const SeriesDetails: FC = () => {
   const { id } = useParams();
