@@ -14,6 +14,7 @@ const ActorList: FC = () => {
         <Col className='pt-4' sm={6} md={4} lg={3} xl={2} key={key}>
           <ActorItem
             key={key}
+            id={actor.id}
             name={actor.name}
             image={actor.image}
             age={actor.age}
