@@ -100,6 +100,7 @@ import { ISeries } from '../../interfaces/ISeries';
 
 const CreateActorForm: FC = () => {
   return <section></section>;
+
 };
 
 export default CreateActorForm;
