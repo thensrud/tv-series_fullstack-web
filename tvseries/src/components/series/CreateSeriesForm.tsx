@@ -104,8 +104,8 @@ const CreateSeriesForm: FC = () => {
 	};
 
 	const postNewSeries = () => {
-		// seriesService.postSeries(newSeries, newImage as File);
-		alert(JSON.stringify(newSeries));
+		seriesService.postSeries(newSeries, newImage as File);
+		// alert(JSON.stringify(newSeries));
 		setNewSeries({
 			name: '',
 			image: '',
