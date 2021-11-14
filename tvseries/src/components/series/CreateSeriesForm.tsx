@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState } from 'react';
+import { FC, ChangeEvent, useState, useEffect } from 'react';
 import { seriesService } from '../../services/seriesService';
 import { ISeries } from '../../interfaces/ISeries';
 import { Badge, Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
@@ -8,18 +8,20 @@ import { IEpisode } from '../../interfaces/IEpisode';
 const CreateSeriesForm: FC = () => {
 	const [newGenreName, setNewGenreName] = useState('');
 	const [newGenre, setNewGenre] = useState<IGenre[]>([{ name: '' }]);
-	const [newEpisodes, setNewEpisodes] = useState<IEpisode>({
-		name: '',
-		seasonNumber: '',
-		episodeNumber: '',
-	});
+	const [newEpisode, setNewEpisode] = useState<IEpisode[]>([
+		{
+			name: '',
+			seasonNumber: '',
+			episodeNumber: '',
+		},
+	]);
 
 	const [newSeries, setNewSeries] = useState<ISeries>({
 		name: '',
 		image: '',
 		genres: newGenre,
 		plot: '',
-		episodes: [newEpisodes],
+		episodes: newEpisode,
 	});
 
 	const [newImage, setNewImage] = useState<File>();
@@ -46,15 +48,17 @@ const CreateSeriesForm: FC = () => {
 				setNewSeries({ ...newSeries, plot: value });
 				break;
 			case 'episodeName':
-				// setNewSeason([ ...newSeason, {seasonNumber: value} ]);
 				break;
 		}
 	};
 
 	const addNewGenre = () => {
 		setNewGenre([...newGenre, { name: newGenreName }]);
-		setNewSeries({ ...newSeries, genres: newGenre });
 	};
+
+	useEffect(() => {
+		setNewSeries({ ...newSeries, genres: newGenre });
+	}, [newGenre]);
 
 	const listGenres = () => {
 		return newGenre.map((genre: IGenre, key: number) => {
@@ -101,17 +105,17 @@ const CreateSeriesForm: FC = () => {
 				/>
 			</FloatingLabel>
 			{/* Legge til sjanger */}
-			{newGenre ? (
+			{newGenreName ? (
 				<Button
 					onClick={addNewGenre}
-					className="mt-3"
+					className="my-3"
 					variant="secondary"
 					type="submit"
 				>
 					Add this genre
 				</Button>
 			) : (
-				<Button className="mt-3" variant="secondary" type="submit" disabled>
+				<Button className="my-3" variant="secondary" type="submit" disabled>
 					Add this genre
 				</Button>
 			)}
@@ -121,6 +125,11 @@ const CreateSeriesForm: FC = () => {
 			<Button onClick={postNewSeries} variant="primary" type="submit">
 				Submit new series
 			</Button>
+			<Row>
+				<Col></Col>
+				<Col></Col>
+				<Col></Col>
+			</Row>
 			<br />
 			<br />
 			<br />
