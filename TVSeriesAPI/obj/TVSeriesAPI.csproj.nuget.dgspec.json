@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Walis Lenovo\\Documents\\Studier_host_2021\\webutvikling3\\eksamensrelatert\\tv-series_fullstack-web\\TVSeriesAPI\\TVSeriesAPI.csproj": {}
+    "/Users/sarahvandijk/HK/Semester_5/PGR305_Webutvikling_3/Eksamen/tv-series_fullstack-web/TVSeriesAPI/TVSeriesAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Walis Lenovo\\Documents\\Studier_host_2021\\webutvikling3\\eksamensrelatert\\tv-series_fullstack-web\\TVSeriesAPI\\TVSeriesAPI.csproj": {
+    "/Users/sarahvandijk/HK/Semester_5/PGR305_Webutvikling_3/Eksamen/tv-series_fullstack-web/TVSeriesAPI/TVSeriesAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Walis Lenovo\\Documents\\Studier_host_2021\\webutvikling3\\eksamensrelatert\\tv-series_fullstack-web\\TVSeriesAPI\\TVSeriesAPI.csproj",
+        "projectUniqueName": "/Users/sarahvandijk/HK/Semester_5/PGR305_Webutvikling_3/Eksamen/tv-series_fullstack-web/TVSeriesAPI/TVSeriesAPI.csproj",
         "projectName": "TVSeriesAPI",
-        "projectPath": "C:\\Users\\Walis Lenovo\\Documents\\Studier_host_2021\\webutvikling3\\eksamensrelatert\\tv-series_fullstack-web\\TVSeriesAPI\\TVSeriesAPI.csproj",
-        "packagesPath": "C:\\Users\\Walis Lenovo\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Walis Lenovo\\Documents\\Studier_host_2021\\webutvikling3\\eksamensrelatert\\tv-series_fullstack-web\\TVSeriesAPI\\obj\\",
+        "projectPath": "/Users/sarahvandijk/HK/Semester_5/PGR305_Webutvikling_3/Eksamen/tv-series_fullstack-web/TVSeriesAPI/TVSeriesAPI.csproj",
+        "packagesPath": "/Users/sarahvandijk/.nuget/packages/",
+        "outputPath": "/Users/sarahvandijk/HK/Semester_5/PGR305_Webutvikling_3/Eksamen/tv-series_fullstack-web/TVSeriesAPI/obj/",
         "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "C:\\Users\\Walis Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "net5.0"
-        ],
+        "configFilePaths": ["/Users/sarahvandijk/.nuget/NuGet/NuGet.Config"],
+        "originalTargetFrameworks": ["net5.0"],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -29,9 +25,7 @@
           }
         },
         "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
+          "warnAsError": ["NU1605"]
         }
       },
       "frameworks": {
@@ -47,14 +41,7 @@
               "version": "[5.6.3, )"
             }
           },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
+          "imports": ["net461", "net462", "net47", "net471", "net472", "net48"],
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {

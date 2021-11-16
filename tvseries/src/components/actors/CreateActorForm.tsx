@@ -1,106 +1,170 @@
-import { FC, ChangeEvent, useState } from 'react';
-import { seriesService } from '../../services/seriesService';
-import { ISeries } from '../../interfaces/ISeries';
+import { FC, ChangeEvent, useState, useEffect } from "react";
+import { IActors } from "../../interfaces/IActors";
+import { IInSeries } from "../../interfaces/IInSeries";
+import { Badge, Form, Button } from "react-bootstrap";
+import { actorsService } from "../../services/actorsService";
 
-/*const CreateActorForm: FC = () => {
-  const [newSeries, setNewSeries] = useState<ISeries>({
-    name: '',
-    image: '',
-    plot: '',
-    genre: [''],
-    seasons: [
-      {
-        seasonNumber: '',
-        episodes: [''],
-      },
-    ],
-  });
+const CreateActorForm: FC = () => {
   const [newImage, setNewImage] = useState<File>();
+  const [newInSeries, setNewInSeries] = useState<IInSeries[]>([]);
+  const [newInSeriesName, setNewInSeriesName] = useState<string>("");
+
+  const [newActor, setNewActor] = useState<IActors>({
+    name: "",
+    age: "",
+    country: "",
+    image: "",
+    inSeries: newInSeries,
+  });
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    let { name } = event.target;
-    let { value } = event.target;
+    let { name, value } = event.target;
 
     switch (name) {
-      case 'name':
-        setNewSeries({ ...newSeries, name: value });
+      case "actorName":
+        setNewActor({ ...newActor, name: value });
         break;
-      case 'image':
+      case "image":
         let { files } = event.target;
         if (files) {
-          setNewSeries({ ...newSeries, image: files[0].name });
+          setNewActor({ ...newActor, image: files[0].name });
           setNewImage(files[0]);
         }
         break;
-      case 'genre':
-        setNewSeries({ ...newSeries, genre: [value] });
+      case "age":
+        setNewActor({ ...newActor, age: value });
         break;
-      case 'plot':
-        setNewSeries({ ...newSeries, plot: value });
+      case "country":
+        setNewActor({ ...newActor, country: value });
         break;
-      case 'seasonNumber':
-        // let tempState = { ...newSeries.seasons };
-        // tempState[0].seasonNumber = value;
-        setNewSeries({ ...newSeries });
+      case "inSeries":
+        setNewInSeriesName(value);
+        break;
+      default:
         break;
     }
   };
+  const addNewInSeries = () => {
+    setNewInSeries([...newInSeries, { name: newInSeriesName }]);
+    setNewInSeriesName("");
+  };
 
-  const postNewSeries = () => {
-    seriesService.postSeries(newSeries, newImage as File);
+  useEffect(() => {
+    setNewActor({
+      ...newActor,
+      inSeries: newInSeries,
+    });
+  }, [newInSeries]);
+
+  const listInSeries = () => {
+    return newInSeries.map((inSeries: IInSeries, key: number) => {
+      return (
+        <Badge className="mx-1" bg="secondary" key={key}>
+          {inSeries.name}
+        </Badge>
+      );
+    });
+  };
+
+  const postNewActor = () => {
+    actorsService.postActors(newActor, newImage as File);
+    //alert(JSON.stringify(newActor));
+    setNewActor({
+      name: "",
+      age: "",
+      country: "",
+      image: "",
+      inSeries: [],
+    });
+    setNewInSeries([]);
   };
 
   return (
     <section>
-      <div>
-        <label>Navn</label>
-        <input
+      {/* Actor name */}
+      <Form.Group className="mb-3  mt-3">
+        <Form.Label>What is the actors name?</Form.Label>
+        <Form.Control
           onChange={handleChange}
-          name='name'
-          type='text'
-          placeholder='E.g. Game of Thrones'
+          name="actorName"
+          type="text"
+          placeholder="Sandra Bullock"
+          value={newActor.name}
         />
-      </div>
-      <div>
-        <label>Velg bilde</label>
-        <input onChange={handleChange} name='image' type='file' />
-      </div>
-      <div>
-        <label>Sjanger(e)</label>
-        <input
-          onChange={handleChange}
-          name='genre'
-          type='text'
-          placeholder='E.g. Fantasy'
-        />
-      </div>
-      <div>
-        <label>Plot</label>
-        <input
-          onChange={handleChange}
-          name='plot'
-          type='text'
-          placeholder='E.g. Everyone wants to sit on a throne'
-        />
-      </div>
-      <div>
-        <label>Season</label>
-        <input
-          onChange={handleChange}
-          name='seasonNumber'
-          type='text'
-          placeholder='E.g. 1'
-        />
-      </div>
+      </Form.Group>
 
-      <input onClick={postNewSeries} type='button' value='Lagre ny serie' />
+      {/* Age */}
+      <Form.Group className="mb-3  mt-3">
+        <Form.Label>Age</Form.Label>
+        <Form.Control
+          onChange={handleChange}
+          name="age"
+          type="text"
+          placeholder="35"
+          value={newActor.age}
+        />
+      </Form.Group>
+
+      {/* Country */}
+      <Form.Group className="mb-3  mt-3">
+        <Form.Label>Country</Form.Label>3
+        <Form.Control
+          onChange={handleChange}
+          name="country"
+          type="text"
+          placeholder="Canada"
+          value={newActor.country}
+        />
+      </Form.Group>
+
+      {/* Imange */}
+      <Form.Group className="mb-3 mt-3">
+        <Form.Label>Actor Image</Form.Label>
+        <Form.Control onChange={handleChange} name="image" type="file" />
+      </Form.Group>
+
+      {/* In Series */}
+      <Form.Group className="mb-3 mt-3">
+        <Form.Label>Has starred in series</Form.Label>
+        <Form.Control
+          onChange={handleChange}
+          name="inSeries"
+          type="text"
+          placeholder="Breaking Bad?"
+          value={newInSeriesName}
+        />
+      </Form.Group>
+
+      {/* Add In Series */}
+      {newInSeriesName ? (
+        <Button
+          onClick={addNewInSeries}
+          className="my-3"
+          variant="secondary"
+          type="submit"
+        >
+          Add this series
+        </Button>
+      ) : (
+        <Button className="my-3" variant="secondary" type="submit" disabled>
+          Add this series
+        </Button>
+      )}
+
+      {/* List all added series */}
+      <p className="mt-1">Series added: {listInSeries()}</p>
+
+      {/* Post a new actor */}
+      <Button
+        className="mt-1"
+        onClick={postNewActor}
+        type="submit"
+        variant="primary"
+      >
+        Submit new Actor
+      </Button>
     </section>
   );
-}; */
-
-const CreateActorForm: FC = () => {
-  return <section></section>;
-
 };
 
 export default CreateActorForm;
