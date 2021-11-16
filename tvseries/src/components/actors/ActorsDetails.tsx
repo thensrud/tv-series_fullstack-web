@@ -8,22 +8,20 @@ import { IInSeries } from '../../interfaces/IInSeries';
 import { SeriesContext } from '../../contexts/SeriesContext';
 import { SeriesContextType } from '../../types/SeriesContextType';
 import { ISeries } from '../../interfaces/ISeries';
+import { Link } from 'react-router-dom';
 
 const ActorsDetails: FC = () => {
   const { id } = useParams();
 
   const { getActorsById } = useContext(ActorsContext) as ActorsContextType;
-  const { getSeriesById } = useContext(SeriesContext) as SeriesContextType;
+  const { series } = useContext(SeriesContext) as SeriesContextType;
   // Trenger egentlig ikke state her, kan vaere statisk objekt
   const [actor, setActor] = useState<IActors>();
-  const [series, setSeries] = useState<ISeries | any>();
 
   useEffect(() => {
     if (id) {
       const _actor = getActorsById(id);
-      const _serie = getSeriesById(id);
       setActor(_actor);
-      setSeries(_serie);
     }
   }, []);
 
@@ -32,16 +30,18 @@ const ActorsDetails: FC = () => {
   };
 
   const createInSeriesList = () => {
-    return actor?.inSeries?.map((series: IInSeries, key: number) => {
+    return actor?.inSeries?.map((featuredIn: IInSeries, key: number) => {
+      let match = matchSeries(featuredIn.name);
       return (
         <div key={key}>
-          <h5>{series.name}</h5>
-          {console.log(matchSeries(series.name))}
-          <img src={`https://localhost:5001/images/$`} width='150' />
-          {
-            // Trenger logikk her for å hente ut bilde av riktig serie fra serie-collection,
-            //som også linker til den seriens side.
-          }
+          <Link to={`/series-details/${match?.id}`}>
+            <h5>{featuredIn.name}</h5>
+            <img
+              src={`https://localhost:5001/images/${match?.image}`}
+              width='100'
+              height='100'
+            />
+          </Link>
         </div>
       );
     });
