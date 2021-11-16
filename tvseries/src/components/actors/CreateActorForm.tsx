@@ -1,7 +1,7 @@
 import { FC, ChangeEvent, useState, useEffect, useContext } from "react";
 import { IActors } from "../../interfaces/IActors";
 import { IInSeries } from "../../interfaces/IInSeries";
-import { Badge, Form, Button } from "react-bootstrap";
+import { Badge, Form, Button, FloatingLabel } from "react-bootstrap";
 import { actorsService } from "../../services/actorsService";
 import { ActorsContext } from "../../contexts/ActorsContext";
 import { ActorsContextType } from "../../types/ActorsContextType";
@@ -87,8 +87,11 @@ const CreateActorForm: FC = () => {
   return (
     <section>
       {/* Actor name */}
-      <Form.Group className="mb-3  mt-3">
-        <Form.Label>What is the actors name?</Form.Label>
+      <FloatingLabel
+        className="input-label mb-3"
+        label="Actors name"
+        controlId="actorName"
+      >
         <Form.Control
           onChange={handleChange}
           name="actorName"
@@ -96,11 +99,10 @@ const CreateActorForm: FC = () => {
           placeholder="Sandra Bullock"
           value={newActor.name}
         />
-      </Form.Group>
+      </FloatingLabel>
 
       {/* Age */}
-      <Form.Group className="mb-3  mt-3">
-        <Form.Label>Age</Form.Label>
+      <FloatingLabel className="input-label mb-3" label="Age">
         <Form.Control
           onChange={handleChange}
           name="age"
@@ -108,11 +110,10 @@ const CreateActorForm: FC = () => {
           placeholder="35"
           value={newActor.age}
         />
-      </Form.Group>
+      </FloatingLabel>
 
       {/* Country */}
-      <Form.Group className="mb-3  mt-3">
-        <Form.Label>Country</Form.Label>3
+      <FloatingLabel className="input-label mb-3" label="Country">
         <Form.Control
           onChange={handleChange}
           name="country"
@@ -120,17 +121,16 @@ const CreateActorForm: FC = () => {
           placeholder="Canada"
           value={newActor.country}
         />
-      </Form.Group>
+      </FloatingLabel>
 
       {/* Imange */}
-      <Form.Group className="mb-3 mt-3">
+      <Form.Group className="mb-4 mt-3">
         <Form.Label>Actor Image</Form.Label>
         <Form.Control onChange={handleChange} name="image" type="file" />
       </Form.Group>
 
       {/* In Series */}
-      <Form.Group className="mb-3 mt-3">
-        <Form.Label>Has starred in series</Form.Label>
+      <FloatingLabel className="input-label mb-3" label="Has starred in series">
         <Form.Control
           onChange={handleChange}
           name="inSeries"
@@ -138,7 +138,7 @@ const CreateActorForm: FC = () => {
           placeholder="Breaking Bad?"
           value={newInSeriesName}
         />
-      </Form.Group>
+      </FloatingLabel>
 
       {/* Add In Series */}
       {newInSeriesName ? (
