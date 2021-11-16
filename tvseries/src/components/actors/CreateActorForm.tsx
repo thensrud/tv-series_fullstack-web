@@ -1,8 +1,10 @@
-import { FC, ChangeEvent, useState, useEffect } from "react";
+import { FC, ChangeEvent, useState, useEffect, useContext } from "react";
 import { IActors } from "../../interfaces/IActors";
 import { IInSeries } from "../../interfaces/IInSeries";
 import { Badge, Form, Button } from "react-bootstrap";
 import { actorsService } from "../../services/actorsService";
+import { ActorsContext } from "../../contexts/ActorsContext";
+import { ActorsContextType } from "../../types/ActorsContextType";
 
 const CreateActorForm: FC = () => {
   const [newImage, setNewImage] = useState<File>();
@@ -16,6 +18,8 @@ const CreateActorForm: FC = () => {
     image: "",
     inSeries: newInSeries,
   });
+
+  const { saveActor } = useContext(ActorsContext) as ActorsContextType;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     let { name, value } = event.target;
@@ -68,7 +72,8 @@ const CreateActorForm: FC = () => {
 
   const postNewActor = () => {
     actorsService.postActors(newActor, newImage as File);
-    //alert(JSON.stringify(newActor));
+    saveActor(newActor);
+
     setNewActor({
       name: "",
       age: "",

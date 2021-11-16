@@ -1,7 +1,7 @@
-import { ActorsContextType } from '../types/ActorsContextType';
-import { createContext, FC, useEffect, useState } from 'react';
-import { IActors } from '../interfaces/IActors';
-import { actorsService } from '../services/actorsService';
+import { ActorsContextType } from "../types/ActorsContextType";
+import { createContext, FC, useEffect, useState } from "react";
+import { IActors } from "../interfaces/IActors";
+import { actorsService } from "../services/actorsService";
 
 export const ActorsContext = createContext<ActorsContextType | null>(null);
 
@@ -21,8 +21,12 @@ export const ActorsProvider: FC = ({ children }) => {
     return actors.find((actor) => actor.id === id) as IActors;
   };
 
+  const saveActor = (newActor: IActors) => {
+    setActors([newActor, ...actors]);
+  };
+
   return (
-    <ActorsContext.Provider value={{ actors, getActorsById }}>
+    <ActorsContext.Provider value={{ actors, getActorsById, saveActor }}>
       {children}
     </ActorsContext.Provider>
   );

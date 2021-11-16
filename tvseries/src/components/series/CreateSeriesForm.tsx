@@ -1,9 +1,11 @@
-import { FC, ChangeEvent, useState, useEffect } from "react";
+import React, { FC, ChangeEvent, useState, useEffect, useContext } from "react";
 import { seriesService } from "../../services/seriesService";
 import { ISeries } from "../../interfaces/ISeries";
 import { Badge, Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
 import { IGenre } from "../../interfaces/IGenre";
 import { IEpisode } from "../../interfaces/IEpisode";
+import { SeriesContext } from "../../contexts/SeriesContext";
+import { SeriesContextType } from "../../types/SeriesContextType";
 
 const CreateSeriesForm: FC = () => {
   const [newGenreName, setNewGenreName] = useState<string>("");
@@ -22,6 +24,8 @@ const CreateSeriesForm: FC = () => {
   });
 
   const [newImage, setNewImage] = useState<File>();
+
+  const { saveSeries } = useContext(SeriesContext) as SeriesContextType;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     let { name } = event.target;
@@ -105,6 +109,8 @@ const CreateSeriesForm: FC = () => {
 
   const postNewSeries = () => {
     seriesService.postSeries(newSeries, newImage as File);
+    saveSeries(newSeries);
+
     // alert(JSON.stringify(newSeries));
     setNewSeries({
       name: "",

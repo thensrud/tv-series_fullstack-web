@@ -1,7 +1,7 @@
-import { SeriesContextType } from '../types/SeriesContextType';
-import { createContext, FC, useEffect, useState } from 'react';
-import { ISeries } from '../interfaces/ISeries';
-import { seriesService } from '../services/seriesService';
+import { SeriesContextType } from "../types/SeriesContextType";
+import { createContext, FC, useEffect, useState } from "react";
+import { ISeries } from "../interfaces/ISeries";
+import { seriesService } from "../services/seriesService";
 
 export const SeriesContext = createContext<SeriesContextType | null>(null);
 
@@ -21,8 +21,12 @@ export const SeriesProvider: FC = ({ children }) => {
     return series.find((serie) => serie.id === id) as ISeries;
   };
 
+  const saveSeries = (newSeries: ISeries) => {
+    setSeries([newSeries, ...series]);
+  };
+
   return (
-    <SeriesContext.Provider value={{ series, getSeriesById }}>
+    <SeriesContext.Provider value={{ series, getSeriesById, saveSeries }}>
       {children}
     </SeriesContext.Provider>
   );
