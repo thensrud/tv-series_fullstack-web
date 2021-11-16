@@ -1,11 +1,11 @@
-import axios from "axios";
-import { IActors } from "../interfaces/IActors";
+import axios from 'axios';
+import { IActors } from '../interfaces/IActors';
 
 export const actorsService = (function () {
   // Er disse riktige??
-  const urlToActorsController = "https://localhost:5001/actors";
+  const urlToActorsController = 'https://localhost:5001/actors';
   const urlToImageUploadController =
-    "https://localhost:5001/ImageUpload/SaveImage";
+    'https://localhost:5001/ImageUpload/SaveImage';
 
   const getAllActors = async () => {
     const result = await axios.get(urlToActorsController);
@@ -14,14 +14,14 @@ export const actorsService = (function () {
 
   const postActors = async (newActors: IActors, image: File) => {
     let formData = new FormData();
-    formData.append("file", image);
+    formData.append('file', image);
 
     axios.post(urlToActorsController, newActors);
     axios({
       url: urlToImageUploadController,
-      method: "POST",
+      method: 'POST',
       data: formData,
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
   };
 

@@ -393,9 +393,7 @@
         "runtime": {
           "lib/netcoreapp3.0/Swashbuckle.AspNetCore.Swagger.dll": {}
         },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        "frameworkReferences": ["Microsoft.AspNetCore.App"]
       },
       "Swashbuckle.AspNetCore.SwaggerGen/5.6.3": {
         "type": "package",
@@ -408,9 +406,7 @@
         "runtime": {
           "lib/netcoreapp3.0/Swashbuckle.AspNetCore.SwaggerGen.dll": {}
         },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        "frameworkReferences": ["Microsoft.AspNetCore.App"]
       },
       "Swashbuckle.AspNetCore.SwaggerUI/5.6.3": {
         "type": "package",
@@ -420,9 +416,7 @@
         "runtime": {
           "lib/netcoreapp3.0/Swashbuckle.AspNetCore.SwaggerUI.dll": {}
         },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
+        "frameworkReferences": ["Microsoft.AspNetCore.App"]
       },
       "System.AppContext/4.3.0": {
         "type": "package",
@@ -4965,10 +4959,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    "net5.0": [
-      "MongoDB.driver >= 2.11.0",
-      "Swashbuckle.AspNetCore >= 5.6.3"
-    ]
+    "net5.0": ["MongoDB.driver >= 2.11.0", "Swashbuckle.AspNetCore >= 5.6.3"]
   },
   "packageFolders": {
     "/Users/sarahvandijk/.nuget/packages/": {}
@@ -4982,12 +4973,8 @@
       "packagesPath": "/Users/sarahvandijk/.nuget/packages/",
       "outputPath": "/Users/sarahvandijk/HK/Semester_5/PGR305_Webutvikling_3/Eksamen/tv-series_fullstack-web/TVSeriesAPI/obj/",
       "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "/Users/sarahvandijk/.nuget/NuGet/NuGet.Config"
-      ],
-      "originalTargetFrameworks": [
-        "net5.0"
-      ],
+      "configFilePaths": ["/Users/sarahvandijk/.nuget/NuGet/NuGet.Config"],
+      "originalTargetFrameworks": ["net5.0"],
       "sources": {
         "https://api.nuget.org/v3/index.json": {}
       },
@@ -4998,9 +4985,7 @@
         }
       },
       "warningProperties": {
-        "warnAsError": [
-          "NU1605"
-        ]
+        "warnAsError": ["NU1605"]
       }
     },
     "frameworks": {
@@ -5016,14 +5001,7 @@
             "version": "[5.6.3, )"
           }
         },
-        "imports": [
-          "net461",
-          "net462",
-          "net47",
-          "net471",
-          "net472",
-          "net48"
-        ],
+        "imports": ["net461", "net462", "net47", "net471", "net472", "net48"],
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
@@ -5034,7 +5012,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.401/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
