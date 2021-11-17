@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { ActorsContext } from "../../contexts/ActorsContext";
 import { IActors } from "../../interfaces/IActors";
 import { ActorsContextType } from "../../types/ActorsContextType";
-//import { IInSeries } from '../../interfaces/IInSeries';
 
 const ActorItem: FC<IActors> = ({
   id,
@@ -14,25 +13,12 @@ const ActorItem: FC<IActors> = ({
   country,
   inSeries,
 }) => {
-  /*const createInSeriesList = () => {
-    return inSeries?.map((series: IInSeries, key: number) => {
-      return (
-        <div key={key}>
-          <h5>{series}</h5>
-          {
-		  // Trenger logikk her for å hente ut bilde av riktig serie fra serie-collection, 
-          //som også linker til den seriens side. MEN dette skal være på details-siden, ikke her 
-		}
-        </div>
-      );
-    });
-  }; 
-  */
-
   const { deleteActor } = useContext(ActorsContext) as ActorsContextType;
 
   const removeActor = () => {
-    alert("Click click");
+    if (id) {
+      deleteActor(id);
+    }
   };
 
   return (

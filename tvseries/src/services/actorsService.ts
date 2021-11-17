@@ -24,9 +24,8 @@ export const actorsService = (function () {
     });
   };
 
-  // Added, idk if it works
   const deleteActor = async (id: any) => {
-    axios.delete(`${urlToActorsController}/${id}`);
+    await axios.delete(`${urlToActorsController}/${id}`);
   };
 
   return { getAllActors, postActors, deleteActor };
