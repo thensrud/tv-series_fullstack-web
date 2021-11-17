@@ -58,6 +58,7 @@ const CreateActorForm: FC = () => {
       ...newActor,
       inSeries: newInSeries,
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newInSeries]);
 
   const listInSeries = () => {
