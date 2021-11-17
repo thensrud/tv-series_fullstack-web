@@ -24,22 +24,20 @@ const SeriesDetails: FC = () => {
 
   const createInActorsList = () => {
     // Mapping through all actors
-    actors?.map((actor) => {
+    return actors?.map((actor) => {
       let featuringIn = actor.inSeries;
       // Mapping through all series an actor has featured in
       return featuringIn?.map((sName, key) => {
         if (sName.name === serie?.name) {
-          console.log('actors name:   ' + actor.name);
           return (
-            <div key={key}>
-              <h5>{actor.name} test</h5>
-            </div>
-          );
-        } else {
-          return (
-            <div key={key}>
-              <h5>This series has no actors</h5>
-            </div>
+            <Link key={key} to={`/actors-details/${actor.id}`}>
+              <h5>{actor.name}</h5>
+              <img
+                src={`https://localhost:5001/images/${actor?.image}`}
+                width='100'
+                height='100'
+              />
+            </Link>
           );
         }
       });
@@ -51,6 +49,7 @@ const SeriesDetails: FC = () => {
       <h3>Du har bedt om id: {id}</h3>
       <article>
         <h4>Serie: {serie?.name}</h4>
+        {/* TODO Add conditional rendering - for example createdInActors() ? createdInActors() : ' This series has no regisred actors ' */}
         <h4>Featured actors: {createInActorsList()}</h4>
       </article>
     </section>
@@ -58,18 +57,3 @@ const SeriesDetails: FC = () => {
 };
 
 export default SeriesDetails;
-
-// Implement after map functions above is working
-/*<div key={key}>
-            <Link to={`/actors-details/${actor.id}`}>
-              <h5>{actor.name}</h5>
-              <img 
-                src={`https://localhost:5001/images/${actor?.image}`}
-                width='100'
-                height='100'
-              />   
-            </Link>
-          </div> */
-// actor
-// console.log(sName.name, key); to access InSeries on actor above
-// console.log(actor.name); to access actors name from map above
