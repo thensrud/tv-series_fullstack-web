@@ -26,7 +26,20 @@ namespace TVSeriesAPI.Controllers
         [HttpPost]
         public Actor Post(Actor newActor)
         {
-            return _actorsService.Create( newActor );
+            return _actorsService.Create(newActor);
+        }
+
+        [HttpDelete("{id:length(24)}")]
+        public IActionResult Delete(string id)
+        {
+            var actor = _actorsService.Get(id);
+
+            if (actor == null)
+            {
+                return NotFound();
+            }
+            _actorsService.Remove(actor.Id);
+            return NoContent();
         }
     }
 }

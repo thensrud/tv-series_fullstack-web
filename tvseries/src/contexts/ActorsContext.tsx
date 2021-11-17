@@ -25,8 +25,14 @@ export const ActorsProvider: FC = ({ children }) => {
     setActors([newActor, ...actors]);
   };
 
+  const deleteActor = (id: string) => {
+    actorsService.deleteActor(id);
+  };
+
   return (
-    <ActorsContext.Provider value={{ actors, getActorsById, saveActor }}>
+    <ActorsContext.Provider
+      value={{ actors, getActorsById, saveActor, deleteActor }}
+    >
       {children}
     </ActorsContext.Provider>
   );

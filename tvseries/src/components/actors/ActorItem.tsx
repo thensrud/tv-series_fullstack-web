@@ -1,8 +1,9 @@
-import { FC } from "react";
-import { Card } from "react-bootstrap";
+import { FC, useContext } from "react";
+import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { ActorsContext } from "../../contexts/ActorsContext";
 import { IActors } from "../../interfaces/IActors";
-//import { IInSeries } from '../../interfaces/IInSeries';
+import { ActorsContextType } from "../../types/ActorsContextType";
 
 const ActorItem: FC<IActors> = ({
   id,
@@ -12,6 +13,14 @@ const ActorItem: FC<IActors> = ({
   country,
   inSeries,
 }) => {
+  const { deleteActor } = useContext(ActorsContext) as ActorsContextType;
+
+  const removeActor = () => {
+    if (id) {
+      deleteActor(id);
+    }
+  };
+
   return (
     <Card>
       <Card.Img
@@ -23,6 +32,10 @@ const ActorItem: FC<IActors> = ({
         <Card.Title>{name}</Card.Title>
         <Link to={`/actors-details/${id}`}>Read more about {name}</Link>
       </Card.Body>
+
+      <Button variant="danger" onClick={removeActor}>
+        Delete
+      </Button>
     </Card>
   );
 };

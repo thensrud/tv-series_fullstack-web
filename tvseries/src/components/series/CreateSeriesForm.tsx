@@ -67,6 +67,7 @@ const CreateSeriesForm: FC = () => {
 
   useEffect(() => {
     setNewSeries({ ...newSeries, genres: newGenre });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newGenre]);
 
   const addNewEpisode = () => {
@@ -85,6 +86,7 @@ const CreateSeriesForm: FC = () => {
 
   useEffect(() => {
     setNewSeries({ ...newSeries, episodes: newEpisode });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newEpisode]);
 
   const listGenres = () => {
