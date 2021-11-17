@@ -1,7 +1,7 @@
-import { SeriesContextType } from "../types/SeriesContextType";
-import { createContext, FC, useEffect, useState } from "react";
-import { ISeries } from "../interfaces/ISeries";
-import { seriesService } from "../services/seriesService";
+import { SeriesContextType } from '../types/SeriesContextType';
+import { createContext, FC, useEffect, useState } from 'react';
+import { ISeries } from '../interfaces/ISeries';
+import { seriesService } from '../services/seriesService';
 
 export const SeriesContext = createContext<SeriesContextType | null>(null);
 
@@ -21,8 +21,14 @@ export const SeriesProvider: FC = ({ children }) => {
     return series.find((serie) => serie.id === id) as ISeries;
   };
 
+  // Todo - saveSeries calls saveIt to avoid crash - this is probably not best practice
+
+  const saveIt = (newSeries: ISeries) => {
+    return [newSeries, ...series];
+  };
+
   const saveSeries = (newSeries: ISeries) => {
-    setSeries([newSeries, ...series]);
+    saveIt(newSeries);
   };
 
   const deleteSeries = (id: string) => {
