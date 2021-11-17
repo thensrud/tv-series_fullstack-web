@@ -5,7 +5,6 @@ import { SeriesContextType } from '../../types/SeriesContextType';
 import { ISeries } from '../../interfaces/ISeries';
 import { ActorsContext } from '../../contexts/ActorsContext';
 import { ActorsContextType } from '../../types/ActorsContextType';
-import { IInSeries } from '../../interfaces/IInSeries';
 import { Link } from 'react-router-dom';
 
 const SeriesDetails: FC = () => {
@@ -24,8 +23,26 @@ const SeriesDetails: FC = () => {
   }, []);
 
   const createInActorsList = () => {
-    return actors?.map((actor, key) => {
-      console.log(actor, key);
+    // Mapping through all actors
+    actors?.map((actor) => {
+      let featuringIn = actor.inSeries;
+      // Mapping through all series an actor has featured in
+      return featuringIn?.map((sName, key) => {
+        if (sName.name === serie?.name) {
+          console.log('actors name:   ' + actor.name);
+          return (
+            <div key={key}>
+              <h5>{actor.name} test</h5>
+            </div>
+          );
+        } else {
+          return (
+            <div key={key}>
+              <h5>This series has no actors</h5>
+            </div>
+          );
+        }
+      });
     });
   };
 
@@ -41,3 +58,18 @@ const SeriesDetails: FC = () => {
 };
 
 export default SeriesDetails;
+
+// Implement after map functions above is working
+/*<div key={key}>
+            <Link to={`/actors-details/${actor.id}`}>
+              <h5>{actor.name}</h5>
+              <img 
+                src={`https://localhost:5001/images/${actor?.image}`}
+                width='100'
+                height='100'
+              />   
+            </Link>
+          </div> */
+// actor
+// console.log(sName.name, key); to access InSeries on actor above
+// console.log(actor.name); to access actors name from map above
