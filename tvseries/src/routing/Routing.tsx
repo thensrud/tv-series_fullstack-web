@@ -8,8 +8,8 @@ import {
   CreateActor,
   HomePage,
 } from '../pages';
-import ActorsDetails from '../pages/ActorsDetails';
-import SeriesDetails from '../pages/SeriesDetails';
+import ActorsDetailsPage from '../pages/ActorsDetailsPage';
+import SeriesDetailsPage from '../pages/SeriesDetailsPage';
 
 // Docs new router version: https://reactrouter.com/docs/en/v6/getting-started/tutorial
 
@@ -24,8 +24,14 @@ const Routing: FC = () => {
         <Route path='create-series' element={<CreateSeries />} />
         <Route path='all-actors' element={<AllActors />} />
         <Route path='create-actor' element={<CreateActor />} />
-        <Route path='series-details/:id' element={<SeriesDetails />}></Route>
-        <Route path='actors-details/:id' element={<ActorsDetails />}></Route>
+        <Route
+          path='series-details/:id'
+          element={<SeriesDetailsPage />}
+        ></Route>
+        <Route
+          path='actors-details/:id'
+          element={<ActorsDetailsPage />}
+        ></Route>
       </Routes>
     </BrowserRouter>
   );
