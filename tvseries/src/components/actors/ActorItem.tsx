@@ -1,7 +1,9 @@
-import { FC } from "react";
-import { Card } from "react-bootstrap";
+import { FC, useContext } from "react";
+import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { ActorsContext } from "../../contexts/ActorsContext";
 import { IActors } from "../../interfaces/IActors";
+import { ActorsContextType } from "../../types/ActorsContextType";
 //import { IInSeries } from '../../interfaces/IInSeries';
 
 const ActorItem: FC<IActors> = ({
@@ -24,7 +26,14 @@ const ActorItem: FC<IActors> = ({
         </div>
       );
     });
-  }; */
+  }; 
+  */
+
+  const { deleteActor } = useContext(ActorsContext) as ActorsContextType;
+
+  const removeActor = () => {
+    alert("Click click");
+  };
 
   return (
     <Card>
@@ -37,6 +46,10 @@ const ActorItem: FC<IActors> = ({
         <Card.Title>{name}</Card.Title>
         <Link to={`/actors-details/${id}`}>Read more about {name}</Link>
       </Card.Body>
+
+      <Button variant="danger" onClick={removeActor}>
+        Delete
+      </Button>
     </Card>
   );
 };

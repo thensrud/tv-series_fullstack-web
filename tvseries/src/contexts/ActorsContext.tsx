@@ -25,8 +25,16 @@ export const ActorsProvider: FC = ({ children }) => {
     setActors([newActor, ...actors]);
   };
 
+  // Added, idk if it works
+  const deleteActor = (id: string) => {
+    const removableActor = actors.find((actor) => actor.id === id);
+    actorsService.deleteActor(removableActor);
+  };
+
   return (
-    <ActorsContext.Provider value={{ actors, getActorsById, saveActor }}>
+    <ActorsContext.Provider
+      value={{ actors, getActorsById, saveActor, deleteActor }}
+    >
       {children}
     </ActorsContext.Provider>
   );
