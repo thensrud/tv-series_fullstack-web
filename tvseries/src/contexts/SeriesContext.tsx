@@ -25,8 +25,14 @@ export const SeriesProvider: FC = ({ children }) => {
     setSeries([newSeries, ...series]);
   };
 
+  const deleteSeries = (id: string) => {
+    seriesService.deleteSeries(id);
+  };
+
   return (
-    <SeriesContext.Provider value={{ series, getSeriesById, saveSeries }}>
+    <SeriesContext.Provider
+      value={{ series, getSeriesById, saveSeries, deleteSeries }}
+    >
       {children}
     </SeriesContext.Provider>
   );
