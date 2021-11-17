@@ -1,7 +1,7 @@
-import { ActorsContextType } from "../types/ActorsContextType";
-import { createContext, FC, useEffect, useState } from "react";
-import { IActors } from "../interfaces/IActors";
-import { actorsService } from "../services/actorsService";
+import { ActorsContextType } from '../types/ActorsContextType';
+import { createContext, FC, useEffect, useState } from 'react';
+import { IActors } from '../interfaces/IActors';
+import { actorsService } from '../services/actorsService';
 
 export const ActorsContext = createContext<ActorsContextType | null>(null);
 
@@ -21,8 +21,13 @@ export const ActorsProvider: FC = ({ children }) => {
     return actors.find((actor) => actor.id === id) as IActors;
   };
 
+  // Todo - saveActor calls saveIt to avoid posting an actors details that are undefined - this is probably not best practice
+  const saveIt = (newActors: IActors) => {
+    return [newActors, ...actors];
+  };
+
   const saveActor = (newActor: IActors) => {
-    setActors([newActor, ...actors]);
+    saveIt(newActor);
   };
 
   const deleteActor = (id: string) => {
