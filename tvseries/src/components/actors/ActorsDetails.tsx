@@ -32,18 +32,20 @@ const ActorsDetails: FC = () => {
   const createInSeriesList = () => {
     return actor?.inSeries?.map((featuredIn: IInSeries, key: number) => {
       let match = matchSeries(featuredIn.name);
-      return (
-        <div key={key}>
-          <Link to={`/series-details/${match?.id}`}>
-            <h5>{featuredIn.name}</h5>
-            <img
-              src={`https://localhost:5001/images/${match?.image}`}
-              width='100'
-              height='100'
-            />
-          </Link>
-        </div>
-      );
+      if (match) {
+        return (
+          <div key={key}>
+            <Link to={`/series-details/${match?.id}`}>
+              <h5>{featuredIn.name}</h5>
+              <img
+                src={`https://localhost:5001/images/${match?.image}`}
+                width='100'
+                height='100'
+              />
+            </Link>
+          </div>
+        );
+      }
     });
   };
 
