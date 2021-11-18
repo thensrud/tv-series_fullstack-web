@@ -1,8 +1,8 @@
-import { IActors } from "../interfaces/IActors";
+import { IActors } from '../interfaces/IActors';
 
 export type ActorsContextType = {
-  actors: IActors[];
-  getActorsById: (id: string) => IActors;
-  saveActor: (newActor: IActors) => void;
-  deleteActor: (id: string) => void;
+	actors: IActors[];
+	getActorsById: (id: string) => IActors;
+	getActorsFromService: () => void;
+	deleteActor: (id: string) => void;
 };
