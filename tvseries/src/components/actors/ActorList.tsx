@@ -14,6 +14,10 @@ const ActorList: FC = () => {
 		getActorsFromService();
 	}, []);
 
+	useEffect(() => {
+		getActorsFromService();
+	}, [actors]);
+
 	const createActorList = () => {
 		return actors?.map((actor: IActors, key: number) => {
 			return (

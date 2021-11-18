@@ -14,6 +14,10 @@ const SeriesList: FC = () => {
 		getSeriesFromService();
 	}, []);
 
+	useEffect(() => {
+		getSeriesFromService();
+	}, [series]);
+
 	const createSeriesList = () => {
 		return series?.map((serie: ISeries, key: number) => {
 			return (
