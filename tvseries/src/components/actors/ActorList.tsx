@@ -12,10 +12,7 @@ const ActorList: FC = () => {
 
 	useEffect(() => {
 		getActorsFromService();
-	}, []);
-
-	useEffect(() => {
-		getActorsFromService();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [actors]);
 
 	const createActorList = () => {

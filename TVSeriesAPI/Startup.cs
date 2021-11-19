@@ -35,20 +35,22 @@ namespace TVSeriesAPI
             );
 
             services.AddSingleton<ISeriesDatabaseSettings>(
-                sp => 
+                sp =>
                     sp.GetRequiredService<IOptions<SeriesDatabaseSettings>>().Value
             );
 
             services.AddSingleton<SeriesService>();
             services.AddSingleton<ActorService>();
+            services.AddSingleton<MoviesService>();
 
             services.AddCors(
-                options => {
-                    options.AddPolicy("AllowAll", 
+                options =>
+                {
+                    options.AddPolicy("AllowAll",
                         builder => builder
                             .AllowAnyOrigin()
                             .AllowAnyHeader()
-                            .AllowAnyMethod()  
+                            .AllowAnyMethod()
                     );
                 }
             );

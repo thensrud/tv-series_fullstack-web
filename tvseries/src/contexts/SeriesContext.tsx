@@ -21,13 +21,28 @@ export const SeriesProvider: FC = ({ children }) => {
 		return series.find((serie) => serie.id === id) as ISeries;
 	};
 
+	const saveSeries = (newSeries: ISeries) => {
+		setSeries([newSeries, ...series]);
+	};
+
 	const deleteSeries = (id: string) => {
 		seriesService.deleteSeries(id);
 	};
 
+	const editSeries = (id: any, editedSeries: ISeries) => {
+		seriesService.editSeries(id, editedSeries);
+	};
+
 	return (
 		<SeriesContext.Provider
-			value={{ series, getSeriesById, getSeriesFromService, deleteSeries }}
+			value={{
+				series,
+				getSeriesFromService,
+				getSeriesById,
+				saveSeries,
+				deleteSeries,
+				editSeries,
+			}}
 		>
 			{children}
 		</SeriesContext.Provider>

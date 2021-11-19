@@ -33,6 +33,11 @@ namespace TVSeriesAPI.Services
             return newActor;
         }
 
+        public void Update(string id, Actor actorIn)
+        {
+            _actors.ReplaceOne(actor => actor.Id == actorIn.Id, actorIn);
+        }
+
         public void Remove(string id)
         {
             _actors.DeleteOne(actor => actor.Id == id);

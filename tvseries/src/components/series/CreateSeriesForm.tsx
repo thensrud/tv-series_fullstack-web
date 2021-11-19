@@ -25,7 +25,7 @@ const CreateSeriesForm: FC = () => {
 
 	const [newImage, setNewImage] = useState<File>();
 
-	// const { updateSeries } = useContext(SeriesContext) as SeriesContextType;
+	// const { saveSeries } = useContext(SeriesContext) as SeriesContextType;
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		let { name } = event.target;
@@ -111,7 +111,7 @@ const CreateSeriesForm: FC = () => {
 
 	const postNewSeries = () => {
 		seriesService.postSeries(newSeries, newImage as File);
-		// updateSeries();
+		// saveSeries(newSeries);
 
 		setNewSeries({
 			name: '',

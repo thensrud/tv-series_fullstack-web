@@ -29,6 +29,19 @@ namespace TVSeriesAPI.Controllers
             return _seriesService.Create(newSeries);
         }
 
+        [HttpPut("{id:length(24)}")]
+        public IActionResult Put(string id, Series seriesIn)
+        {
+            var series = _seriesService.Get(id);
+
+            if (series == null)
+            {
+                return NotFound();
+            }
+            _seriesService.Update(id, seriesIn);
+            return NoContent();
+        }
+
         [HttpDelete("{id:length(24)}")]
         public IActionResult Delete(string id)
         {

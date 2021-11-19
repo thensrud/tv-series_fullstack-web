@@ -21,13 +21,28 @@ export const ActorsProvider: FC = ({ children }) => {
 		return actors.find((actor) => actor.id === id) as IActors;
 	};
 
+	const saveActor = (newActor: IActors) => {
+		setActors([newActor, ...actors]);
+	};
+
 	const deleteActor = (id: string) => {
 		actorsService.deleteActor(id);
 	};
 
+	const editActor = (id: any, editedActor: IActors) => {
+		actorsService.editActor(id, editedActor);
+	};
+
 	return (
 		<ActorsContext.Provider
-			value={{ actors, getActorsById, getActorsFromService, deleteActor }}
+			value={{
+				actors,
+				getActorsFromService,
+				getActorsById,
+				saveActor,
+				deleteActor,
+				editActor,
+			}}
 		>
 			{children}
 		</ActorsContext.Provider>

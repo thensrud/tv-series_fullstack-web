@@ -19,7 +19,7 @@ const CreateActorForm: FC = () => {
 		inSeries: newInSeries,
 	});
 
-	// const { updateActor } = useContext(ActorsContext) as ActorsContextType;
+	const { saveActor } = useContext(ActorsContext) as ActorsContextType;
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		let { name, value } = event.target;
@@ -73,7 +73,7 @@ const CreateActorForm: FC = () => {
 
 	const postNewActor = () => {
 		actorsService.postActors(newActor, newImage as File);
-		// updateActor();
+		saveActor(newActor);
 
 		setNewActor({
 			name: '',
@@ -124,7 +124,7 @@ const CreateActorForm: FC = () => {
 				/>
 			</FloatingLabel>
 
-			{/* Imange */}
+			{/* Image */}
 			<Form.Group className="mb-4 mt-3">
 				<Form.Label>Actor Image</Form.Label>
 				<Form.Control onChange={handleChange} name="image" type="file" />
