@@ -1,14 +1,14 @@
-import { useParams } from 'react-router';
-import { FC, useContext, useEffect, useState } from 'react';
-import { SeriesContext } from '../../contexts/SeriesContext';
-import { SeriesContextType } from '../../types/SeriesContextType';
-import { ISeries } from '../../interfaces/ISeries';
-import { ActorsContext } from '../../contexts/ActorsContext';
-import { ActorsContextType } from '../../types/ActorsContextType';
-import { Link, To, useNavigate } from 'react-router-dom';
-import { Alert, Button, Card, Col, Row } from 'react-bootstrap';
-import { IEpisode } from '../../interfaces/IEpisode';
-import { IInSeries } from '../../interfaces/IInSeries';
+import { useParams } from "react-router";
+import { FC, useContext, useEffect, useState } from "react";
+import { SeriesContext } from "../../contexts/SeriesContext";
+import { SeriesContextType } from "../../types/SeriesContextType";
+import { ISeries } from "../../interfaces/ISeries";
+import { ActorsContext } from "../../contexts/ActorsContext";
+import { ActorsContextType } from "../../types/ActorsContextType";
+import { Link, To, useNavigate } from "react-router-dom";
+import { Alert, Button, Card, Col, Row } from "react-bootstrap";
+import { IEpisode } from "../../interfaces/IEpisode";
+import { IInSeries } from "../../interfaces/IInSeries";
 
 const SeriesDetails: FC = () => {
   const { id } = useParams();
@@ -40,10 +40,10 @@ const SeriesDetails: FC = () => {
         if (sName.name === series?.name) {
           amountOfFeaturedActors += 1;
           return (
-            <Col className='mt-1' sm={6} md={4} lg={3} xl={2} key={key}>
-              <Card className='mini-card'>
+            <Col className="mt-1" sm={6} md={4} lg={3} xl={2} key={key}>
+              <Card className="mini-card">
                 <Card.Img
-                  variant='top'
+                  variant="top"
                   src={`https://localhost:5001/images/${actor?.image}`}
                   alt={actor?.name}
                 />
@@ -52,7 +52,7 @@ const SeriesDetails: FC = () => {
                 </Card.Body>
 
                 <Button
-                  variant='primary'
+                  variant="primary"
                   onClick={() => handleClick(`/actors-details/${actor.id}`)}
                 >
                   Read more
@@ -68,7 +68,7 @@ const SeriesDetails: FC = () => {
   const renderEpisodes = () => {
     return series?.episodes?.map((episode: IEpisode, key: number) => {
       return (
-        <p>
+        <p key={key}>
           "{episode.name}", which is episode number {episode.episodeNumber} in
           season {episode.seasonNumber}.
         </p>
@@ -78,23 +78,23 @@ const SeriesDetails: FC = () => {
 
   return (
     <section>
-      <h2 className='mb-3'>{series?.name}</h2>
+      <h2 className="mb-3">{series?.name}</h2>
       <img
         src={`https://localhost:5001/images/${series?.image}`}
-        style={{ height: '350px' }}
+        style={{ height: "350px" }}
         alt={series?.name}
       />
-      <h4 className='mb-3 mt-4'>Plot:</h4>
+      <h4 className="mb-3 mt-4">Plot:</h4>
       <p>{series?.plot}</p>
-      <h4 className='mb-3 mt-4'>Episodes:</h4>
+      <h4 className="mb-3 mt-4">Episodes:</h4>
       <div>{renderEpisodes()}</div>
       <Button
-        className='mt-4'
+        className="mt-4"
         onClick={() => handleClick(`/edit-series/${id}`)}
       >
         Edit Series Info
       </Button>
-      <h4 className='mt-4'>Actors featured in this series:</h4>
+      <h4 className="mt-4">Actors featured in this series:</h4>
       <Row>{createInActorsList()}</Row>
     </section>
   );
