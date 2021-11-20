@@ -6,7 +6,9 @@ import { ISeries } from '../../interfaces/ISeries';
 import { ActorsContext } from '../../contexts/ActorsContext';
 import { ActorsContextType } from '../../types/ActorsContextType';
 import { Link, To, useNavigate } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Alert, Button, Card, Col, Row } from 'react-bootstrap';
+import { IEpisode } from '../../interfaces/IEpisode';
+import { IInSeries } from '../../interfaces/IInSeries';
 
 const SeriesDetails: FC = () => {
 	const { id } = useParams();
@@ -14,55 +16,84 @@ const SeriesDetails: FC = () => {
 	const { getSeriesById } = useContext(SeriesContext) as SeriesContextType;
 	const { actors } = useContext(ActorsContext) as ActorsContextType;
 	// Trenger egentlig ikke state her, kan vaere statisk objekt
-	const [serie, setSerie] = useState<ISeries>();
+	const [series, setSeries] = useState<ISeries>();
 
 	useEffect(() => {
 		if (id) {
-			const _serie = getSeriesById(id);
-			setSerie(_serie);
+			const _series = getSeriesById(id);
+			setSeries(_series);
 		}
 	}, []);
-
-	const createInActorsList = () => {
-		// Mapping through all actors
-		return actors?.map((actor) => {
-			let featuringIn = actor.inSeries;
-			// Mapping through all series an actor has featured in
-			return featuringIn?.map((sName, key) => {
-				if (sName.name === serie?.name) {
-					return (
-						<div key={key}>
-							<Link to={`/actors-details/${actor.id}`}>
-								<h5>{actor.name}</h5>
-								<img
-									src={`https://localhost:5001/images/${actor?.image}`}
-									width="100"
-									height="100"
-									alt={actor?.name}
-								/>
-							</Link>
-						</div>
-					);
-				}
-			});
-		});
-	};
 
 	const navigate = useNavigate();
 	const handleClick = (path: To) => {
 		navigate(path);
 	};
 
+	const createInActorsList = () => {
+		// Mapping through all actors
+		return actors?.map((actor) => {
+			let featuringIn = actor.inSeries;
+			// Mapping through all series an actor has featured in
+			return featuringIn?.map((sName: IInSeries, key: number) => {
+				if (sName.name === series?.name) {
+					return (
+						<Col className="mt-1" sm={6} md={4} lg={3} xl={2} key={key}>
+							<Card className="mini-card">
+								<Card.Img
+									variant="top"
+									src={`https://localhost:5001/images/${actor?.image}`}
+									alt={actor?.name}
+								/>
+								<Card.Body>
+									<Card.Title>{actor.name}</Card.Title>
+								</Card.Body>
+
+								<Button
+									variant="primary"
+									onClick={() => handleClick(`/actors-details/${actor.id}`)}
+								>
+									Read more
+								</Button>
+							</Card>
+						</Col>
+					);
+				}
+			});
+		});
+	};
+
+	const renderEpisodes = () => {
+		return series?.episodes?.map((episode: IEpisode, key: number) => {
+			return (
+				<p>
+					"{episode.name}", which is episode number {episode.episodeNumber} in
+					season {episode.seasonNumber}.
+				</p>
+			);
+		});
+	};
+
 	return (
 		<section>
-			<h3>Du har bedt om id: {id}</h3>
-			<article>
-				<h4>Serie: {serie?.name}</h4>
-				<h4>Featured actors: {createInActorsList()}</h4>
-			</article>
-			<Button onClick={() => handleClick(`/edit-series/${id}`)}>
+			<h2 className="mb-3">{series?.name}</h2>
+			<img
+				src={`https://localhost:5001/images/${series?.image}`}
+				style={{ height: '350px' }}
+				alt={series?.name}
+			/>
+			<h4 className="mb-3 mt-4">Plot:</h4>
+			<p>{series?.plot}</p>
+			<h4 className="mb-3 mt-4">Episodes:</h4>
+			<div>{renderEpisodes()}</div>
+			<Button
+				className="mt-4"
+				onClick={() => handleClick(`/edit-series/${id}`)}
+			>
 				Edit Series Info
 			</Button>
+			<h4 className="mt-4">Actors featured in this series:</h4>
+			<Row>{createInActorsList()}</Row>
 		</section>
 	);
 };

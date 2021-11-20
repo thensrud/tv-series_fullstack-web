@@ -22,6 +22,7 @@ const MovieItem: FC<IMovies> = ({ id, name, image, plot, genres }) => {
 	return (
 		<Card>
 			<Card.Img
+				style={{ height: '250px' }}
 				variant="top"
 				src={`https://localhost:5001/images/${image}`}
 				alt={name}

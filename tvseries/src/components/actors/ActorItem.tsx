@@ -29,6 +29,7 @@ const ActorItem: FC<IActors> = ({
 	return (
 		<Card>
 			<Card.Img
+				style={{ height: '250px' }}
 				variant="top"
 				src={`https://localhost:5001/images/${image}`}
 				alt={name}

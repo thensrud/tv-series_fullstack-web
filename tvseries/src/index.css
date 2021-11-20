@@ -19,7 +19,13 @@ code {
 .section {
 	color: rgb(255, 255, 255);
 	min-height: 100vh;
-	background-color: rgb(65, 65, 89);
+	background: rgb(2, 0, 36);
+	background: linear-gradient(
+		90deg,
+		rgba(2, 0, 36, 1) 0%,
+		rgba(32, 32, 102, 1) 35%,
+		rgba(0, 104, 125, 1) 100%
+	);
 	padding: 1.5rem;
 }
 

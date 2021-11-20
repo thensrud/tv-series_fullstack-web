@@ -12,10 +12,7 @@ const SeriesList: FC = () => {
 
 	useEffect(() => {
 		getSeriesFromService();
-	}, []);
-
-	useEffect(() => {
-		getSeriesFromService();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [series]);
 
 	const createSeriesList = () => {

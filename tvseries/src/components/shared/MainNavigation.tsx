@@ -14,18 +14,21 @@ const MainNavigation: FC = () => {
 					<Nav.Link as={Link} to="/">
 						Home
 					</Nav.Link>
+
 					<Nav.Link as={Link} to="all-series">
 						All series
 					</Nav.Link>
 					<Nav.Link as={Link} to="create-series">
 						Add new series
 					</Nav.Link>
+
 					<Nav.Link as={Link} to="all-actors">
 						All actors
 					</Nav.Link>
 					<Nav.Link as={Link} to="create-actor">
 						Add new actor
 					</Nav.Link>
+
 					<Nav.Link as={Link} to="all-movies">
 						All movies
 					</Nav.Link>
