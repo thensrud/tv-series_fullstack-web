@@ -6,45 +6,49 @@ import { seriesService } from '../services/seriesService';
 export const SeriesContext = createContext<SeriesContextType | null>(null);
 
 export const SeriesProvider: FC = ({ children }) => {
-	const [series, setSeries] = useState<ISeries[]>([]);
+  const [series, setSeries] = useState<ISeries[]>([]);
 
-	useEffect(() => {
-		getSeriesFromService();
-	}, []);
+  useEffect(() => {
+    getSeriesFromService();
+  }, []);
 
-	const getSeriesFromService = async () => {
-		const result = await seriesService.getAllSeries();
-		setSeries(result);
-	};
+  const getSeriesFromService = async () => {
+    try {
+      const result = await seriesService.getAllSeries();
+      setSeries(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-	const getSeriesById = (id: string) => {
-		return series.find((serie) => serie.id === id) as ISeries;
-	};
+  const getSeriesById = (id: string) => {
+    return series.find((serie) => serie.id === id) as ISeries;
+  };
 
-	const saveSeries = (newSeries: ISeries) => {
-		setSeries([newSeries, ...series]);
-	};
+  const saveSeries = (newSeries: ISeries) => {
+    setSeries([newSeries, ...series]);
+  };
 
-	const deleteSeries = (id: string) => {
-		seriesService.deleteSeries(id);
-	};
+  const deleteSeries = (id: string) => {
+    seriesService.deleteSeries(id);
+  };
 
-	const editSeries = (id: any, editedSeries: ISeries) => {
-		seriesService.editSeries(id, editedSeries);
-	};
+  const editSeries = (id: any, editedSeries: ISeries) => {
+    seriesService.editSeries(id, editedSeries);
+  };
 
-	return (
-		<SeriesContext.Provider
-			value={{
-				series,
-				getSeriesFromService,
-				getSeriesById,
-				saveSeries,
-				deleteSeries,
-				editSeries,
-			}}
-		>
-			{children}
-		</SeriesContext.Provider>
-	);
+  return (
+    <SeriesContext.Provider
+      value={{
+        series,
+        getSeriesFromService,
+        getSeriesById,
+        saveSeries,
+        deleteSeries,
+        editSeries,
+      }}
+    >
+      {children}
+    </SeriesContext.Provider>
+  );
 };

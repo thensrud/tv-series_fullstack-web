@@ -1,9 +1,10 @@
-import { ChangeEvent, FC, useContext, useEffect, useState } from "react";
-import { Button, FloatingLabel, Form } from "react-bootstrap";
-import { useParams } from "react-router";
-import { SeriesContext } from "../../contexts/SeriesContext";
-import { ISeries } from "../../interfaces/ISeries";
-import { SeriesContextType } from "../../types/SeriesContextType";
+import { ChangeEvent, FC, useContext, useEffect, useState } from 'react';
+import { Button, FloatingLabel, Form } from 'react-bootstrap';
+import { useParams } from 'react-router';
+import { To, useNavigate } from 'react-router-dom';
+import { SeriesContext } from '../../contexts/SeriesContext';
+import { ISeries } from '../../interfaces/ISeries';
+import { SeriesContextType } from '../../types/SeriesContextType';
 
 const EditSeries: FC = () => {
   const { id } = useParams();
@@ -11,8 +12,8 @@ const EditSeries: FC = () => {
   const { getSeriesById } = useContext(SeriesContext) as SeriesContextType;
 
   const [editedSeries, setEditedSeries] = useState<ISeries>({
-    name: "",
-    plot: "",
+    name: '',
+    plot: '',
   });
 
   const { editSeries } = useContext(SeriesContext) as SeriesContextType;
@@ -21,10 +22,10 @@ const EditSeries: FC = () => {
     let { name, value } = event.target;
 
     switch (name) {
-      case "seriesName":
+      case 'seriesName':
         setEditedSeries({ ...editedSeries, name: value });
         break;
-      case "plot":
+      case 'plot':
         setEditedSeries({ ...editedSeries, plot: value });
         break;
       default:
@@ -40,50 +41,57 @@ const EditSeries: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const navigate = useNavigate();
+  const handleClick = (path: To) => {
+    navigate(path);
+  };
+
   const postEdit = () => {
     editSeries(id, editedSeries);
 
-    console.log(id, editedSeries.name + ":     id    +    editedSeries name");
-    console.log(editedSeries.plot + ":   editedSeries plot");
+    console.log(id, editedSeries.name + ':     id    +    editedSeries name');
+    console.log(editedSeries.plot + ':   editedSeries plot');
 
     setEditedSeries({
-      name: "",
-      plot: "",
+      name: '',
+      plot: '',
     });
+
+    handleClick(`/all-series`);
   };
 
   return (
     <section>
       {/* Series name */}
       <FloatingLabel
-        className="input-label mb-3"
-        label="Series name"
-        controlId="seriesName"
+        className='input-label mb-3'
+        label='Series name'
+        controlId='seriesName'
       >
         <Form.Control
           onChange={handleChange}
-          name="seriesName"
-          type="text"
+          name='seriesName'
+          type='text'
           value={editedSeries.name}
         />
       </FloatingLabel>
 
       {/* Plot */}
-      <FloatingLabel className="input-label mb-3" label="Plot">
+      <FloatingLabel className='input-label mb-3' label='Plot'>
         <Form.Control
           onChange={handleChange}
-          name="plot"
-          type="text"
+          name='plot'
+          type='text'
           value={editedSeries.plot}
         />
       </FloatingLabel>
 
       {/* Update(Put) the edited series */}
       <Button
-        className="mt-1"
+        className='mt-1'
         onClick={postEdit}
-        type="submit"
-        variant="primary"
+        type='submit'
+        variant='primary'
       >
         Submit edit
       </Button>
