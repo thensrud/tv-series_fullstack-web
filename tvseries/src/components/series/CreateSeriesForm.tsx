@@ -18,7 +18,7 @@ const CreateSeriesForm: FC = () => {
 	const [newSeries, setNewSeries] = useState<ISeries>({
 		name: '',
 		image: '',
-		genres: newGenre,
+		genre: newGenre,
 		plot: '',
 		episodes: newEpisode,
 	});
@@ -66,7 +66,7 @@ const CreateSeriesForm: FC = () => {
 	};
 
 	useEffect(() => {
-		setNewSeries({ ...newSeries, genres: newGenre });
+		setNewSeries({ ...newSeries, genre: newGenre });
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [newGenre]);
 
@@ -116,7 +116,7 @@ const CreateSeriesForm: FC = () => {
 		setNewSeries({
 			name: '',
 			image: '',
-			genres: [],
+			genre: [],
 			plot: '',
 			episodes: [],
 		});

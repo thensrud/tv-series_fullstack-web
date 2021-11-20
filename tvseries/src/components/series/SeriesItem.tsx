@@ -5,7 +5,7 @@ import { SeriesContext } from '../../contexts/SeriesContext';
 import { ISeries } from '../../interfaces/ISeries';
 import { SeriesContextType } from '../../types/SeriesContextType';
 
-const SeriesItem: FC<ISeries> = ({ id, name, image, plot, genres }) => {
+const SeriesItem: FC<ISeries> = ({ id, name, image, plot, genre }) => {
 	const { deleteSeries } = useContext(SeriesContext) as SeriesContextType;
 
 	const navigate = useNavigate();
@@ -29,7 +29,7 @@ const SeriesItem: FC<ISeries> = ({ id, name, image, plot, genres }) => {
 			/>
 			<Card.Body>
 				<Card.Title>{name}</Card.Title>
-				<Card.Subtitle className="pb-3">{genres} </Card.Subtitle>
+				{/* <Card.Subtitle className="pb-3">{genre} </Card.Subtitle> */}
 				<Card.Text>{plot}</Card.Text>
 			</Card.Body>
 

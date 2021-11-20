@@ -4,7 +4,7 @@ export interface ISeries {
 	id?: string;
 	name: string;
 	image?: string;
-	genres?: IGenre[];
+	genre?: IGenre[];
 	plot: string;
 	episodes?: IEpisode[];
 }
