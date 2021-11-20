@@ -11,91 +11,93 @@ import { IEpisode } from '../../interfaces/IEpisode';
 import { IInSeries } from '../../interfaces/IInSeries';
 
 const SeriesDetails: FC = () => {
-	const { id } = useParams();
+  const { id } = useParams();
 
-	const { getSeriesById } = useContext(SeriesContext) as SeriesContextType;
-	const { actors } = useContext(ActorsContext) as ActorsContextType;
-	// Trenger egentlig ikke state her, kan vaere statisk objekt
-	const [series, setSeries] = useState<ISeries>();
+  const { getSeriesById } = useContext(SeriesContext) as SeriesContextType;
+  const { actors } = useContext(ActorsContext) as ActorsContextType;
+  // Trenger egentlig ikke state her, kan vaere statisk objekt
+  const [series, setSeries] = useState<ISeries>();
 
-	useEffect(() => {
-		if (id) {
-			const _series = getSeriesById(id);
-			setSeries(_series);
-		}
-	}, []);
+  useEffect(() => {
+    if (id) {
+      const _series = getSeriesById(id);
+      setSeries(_series);
+    }
+  }, []);
 
-	const navigate = useNavigate();
-	const handleClick = (path: To) => {
-		navigate(path);
-	};
+  const navigate = useNavigate();
+  const handleClick = (path: To) => {
+    navigate(path);
+  };
 
-	const createInActorsList = () => {
-		// Mapping through all actors
-		return actors?.map((actor) => {
-			let featuringIn = actor.inSeries;
-			// Mapping through all series an actor has featured in
-			return featuringIn?.map((sName: IInSeries, key: number) => {
-				if (sName.name === series?.name) {
-					return (
-						<Col className="mt-1" sm={6} md={4} lg={3} xl={2} key={key}>
-							<Card className="mini-card">
-								<Card.Img
-									variant="top"
-									src={`https://localhost:5001/images/${actor?.image}`}
-									alt={actor?.name}
-								/>
-								<Card.Body>
-									<Card.Title>{actor.name}</Card.Title>
-								</Card.Body>
+  const createInActorsList = () => {
+    let amountOfFeaturedActors = 0;
+    // Mapping through all actors
+    return actors?.map((actor) => {
+      let featuringIn = actor.inSeries;
+      // Mapping through all series an actor has featured in
+      return featuringIn?.map((sName: IInSeries, key: number) => {
+        if (sName.name === series?.name) {
+          amountOfFeaturedActors += 1;
+          return (
+            <Col className='mt-1' sm={6} md={4} lg={3} xl={2} key={key}>
+              <Card className='mini-card'>
+                <Card.Img
+                  variant='top'
+                  src={`https://localhost:5001/images/${actor?.image}`}
+                  alt={actor?.name}
+                />
+                <Card.Body>
+                  <Card.Title>{actor.name}</Card.Title>
+                </Card.Body>
 
-								<Button
-									variant="primary"
-									onClick={() => handleClick(`/actors-details/${actor.id}`)}
-								>
-									Read more
-								</Button>
-							</Card>
-						</Col>
-					);
-				}
-			});
-		});
-	};
+                <Button
+                  variant='primary'
+                  onClick={() => handleClick(`/actors-details/${actor.id}`)}
+                >
+                  Read more
+                </Button>
+              </Card>
+            </Col>
+          );
+        }
+      });
+    });
+  };
 
-	const renderEpisodes = () => {
-		return series?.episodes?.map((episode: IEpisode, key: number) => {
-			return (
-				<p>
-					"{episode.name}", which is episode number {episode.episodeNumber} in
-					season {episode.seasonNumber}.
-				</p>
-			);
-		});
-	};
+  const renderEpisodes = () => {
+    return series?.episodes?.map((episode: IEpisode, key: number) => {
+      return (
+        <p>
+          "{episode.name}", which is episode number {episode.episodeNumber} in
+          season {episode.seasonNumber}.
+        </p>
+      );
+    });
+  };
 
-	return (
-		<section>
-			<h2 className="mb-3">{series?.name}</h2>
-			<img
-				src={`https://localhost:5001/images/${series?.image}`}
-				style={{ height: '350px' }}
-				alt={series?.name}
-			/>
-			<h4 className="mb-3 mt-4">Plot:</h4>
-			<p>{series?.plot}</p>
-			<h4 className="mb-3 mt-4">Episodes:</h4>
-			<div>{renderEpisodes()}</div>
-			<Button
-				className="mt-4"
-				onClick={() => handleClick(`/edit-series/${id}`)}
-			>
-				Edit Series Info
-			</Button>
-			<h4 className="mt-4">Actors featured in this series:</h4>
-			<Row>{createInActorsList()}</Row>
-		</section>
-	);
+  return (
+    <section>
+      <h2 className='mb-3'>{series?.name}</h2>
+      <img
+        src={`https://localhost:5001/images/${series?.image}`}
+        style={{ height: '350px' }}
+        alt={series?.name}
+      />
+      <h4 className='mb-3 mt-4'>Plot:</h4>
+      <p>{series?.plot}</p>
+      <h4 className='mb-3 mt-4'>Episodes:</h4>
+      <div>{renderEpisodes()}</div>
+      <Button
+        className='mt-4'
+        onClick={() => handleClick(`/edit-series/${id}`)}
+      >
+        Edit Series Info
+      </Button>
+      <h4 className='mt-4'>Actors featured in this series:</h4>
+      <Row>{createInActorsList()}</Row>
+    </section>
+  );
 };
 
 export default SeriesDetails;
