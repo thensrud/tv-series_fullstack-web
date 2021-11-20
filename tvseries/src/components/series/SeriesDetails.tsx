@@ -5,8 +5,8 @@ import { SeriesContextType } from "../../types/SeriesContextType";
 import { ISeries } from "../../interfaces/ISeries";
 import { ActorsContext } from "../../contexts/ActorsContext";
 import { ActorsContextType } from "../../types/ActorsContextType";
-import { Link, To, useNavigate } from "react-router-dom";
-import { Alert, Button, Card, Col, Row } from "react-bootstrap";
+import { To, useNavigate } from "react-router-dom";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { IEpisode } from "../../interfaces/IEpisode";
 import { IInSeries } from "../../interfaces/IInSeries";
 
@@ -23,6 +23,7 @@ const SeriesDetails: FC = () => {
       const _series = getSeriesById(id);
       setSeries(_series);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const navigate = useNavigate();
@@ -61,6 +62,7 @@ const SeriesDetails: FC = () => {
             </Col>
           );
         }
+        return null;
       });
     });
   };

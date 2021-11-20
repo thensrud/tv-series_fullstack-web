@@ -5,11 +5,14 @@ import { Badge, Form, Button, FloatingLabel } from "react-bootstrap";
 import { actorsService } from "../../services/actorsService";
 import { ActorsContext } from "../../contexts/ActorsContext";
 import { ActorsContextType } from "../../types/ActorsContextType";
+import { IInMovies } from "../../interfaces/IInMovie";
 
 const CreateActorForm: FC = () => {
   const [newImage, setNewImage] = useState<File>();
   const [newInSeries, setNewInSeries] = useState<IInSeries[]>([]);
   const [newInSeriesName, setNewInSeriesName] = useState<string>("");
+  const [newInMovies, setNewInMovies] = useState<IInMovies[]>([]);
+  const [newInMoviesName, setNewInMoviesName] = useState<string>("");
 
   const [newActor, setNewActor] = useState<IActors>({
     name: "",
@@ -45,6 +48,9 @@ const CreateActorForm: FC = () => {
       case "inSeries":
         setNewInSeriesName(value);
         break;
+      case "inMovies":
+        setNewInMoviesName(value);
+        break;
       default:
         break;
     }
@@ -72,6 +78,29 @@ const CreateActorForm: FC = () => {
     });
   };
 
+  const addNewInMovies = () => {
+    setNewInMovies([...newInMovies, { name: newInMoviesName }]);
+    setNewInMoviesName("");
+  };
+
+  useEffect(() => {
+    setNewActor({
+      ...newActor,
+      inMovies: newInMovies,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [newInMovies]);
+
+  const listInMovies = () => {
+    return newInMovies.map((inMovies: IInMovies, key: number) => {
+      return (
+        <Badge className="mx-1" bg="secondary" key={key}>
+          {inMovies.name}
+        </Badge>
+      );
+    });
+  };
+
   const postNewActor = () => {
     actorsService.postActors(newActor, newImage as File);
     saveActor(newActor);
@@ -85,6 +114,7 @@ const CreateActorForm: FC = () => {
       inMovies: [],
     });
     setNewInSeries([]);
+    setNewInMovies([]);
   };
 
   return (
@@ -161,6 +191,36 @@ const CreateActorForm: FC = () => {
 
       {/* List all added series */}
       <p className="mt-1">Series added: {listInSeries()}</p>
+
+      {/* In Movies */}
+      <FloatingLabel className="input-label mb-3" label="Has starred in movies">
+        <Form.Control
+          onChange={handleChange}
+          name="inMovies"
+          type="text"
+          placeholder="Diehard?"
+          value={newInMoviesName}
+        />
+      </FloatingLabel>
+
+      {/* Add In Movies */}
+      {newInMoviesName ? (
+        <Button
+          onClick={addNewInMovies}
+          className="my-3"
+          variant="secondary"
+          type="submit"
+        >
+          Add this movie
+        </Button>
+      ) : (
+        <Button className="my-3" variant="secondary" type="submit" disabled>
+          Add this movie
+        </Button>
+      )}
+
+      {/* List all added movies */}
+      <p className="mt-1">Movies added: {listInMovies()}</p>
 
       {/* Post a new actor */}
       <Button

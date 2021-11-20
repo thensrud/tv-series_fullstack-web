@@ -68,6 +68,7 @@ const MovieDetails: FC = () => {
             </Col>
           );
         }
+        return null;
       });
     });
   };
