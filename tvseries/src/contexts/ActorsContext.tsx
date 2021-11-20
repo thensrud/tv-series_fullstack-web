@@ -6,45 +6,49 @@ import { actorsService } from '../services/actorsService';
 export const ActorsContext = createContext<ActorsContextType | null>(null);
 
 export const ActorsProvider: FC = ({ children }) => {
-	const [actors, setActors] = useState<IActors[]>([]);
+  const [actors, setActors] = useState<IActors[]>([]);
 
-	useEffect(() => {
-		getActorsFromService();
-	}, []);
+  useEffect(() => {
+    getActorsFromService();
+  }, []);
 
-	const getActorsFromService = async () => {
-		const result = await actorsService.getAllActors();
-		setActors(result);
-	};
+  const getActorsFromService = async () => {
+    try {
+      const result = await actorsService.getAllActors();
+      setActors(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
-	const getActorsById = (id: string) => {
-		return actors.find((actor) => actor.id === id) as IActors;
-	};
+  const getActorsById = (id: string) => {
+    return actors.find((actor) => actor.id === id) as IActors;
+  };
 
-	const saveActor = (newActor: IActors) => {
-		setActors([newActor, ...actors]);
-	};
+  const saveActor = (newActor: IActors) => {
+    setActors([newActor, ...actors]);
+  };
 
-	const deleteActor = (id: string) => {
-		actorsService.deleteActor(id);
-	};
+  const deleteActor = (id: string) => {
+    actorsService.deleteActor(id);
+  };
 
-	const editActor = (id: any, editedActor: IActors) => {
-		actorsService.editActor(id, editedActor);
-	};
+  const editActor = (id: any, editedActor: IActors) => {
+    actorsService.editActor(id, editedActor);
+  };
 
-	return (
-		<ActorsContext.Provider
-			value={{
-				actors,
-				getActorsFromService,
-				getActorsById,
-				saveActor,
-				deleteActor,
-				editActor,
-			}}
-		>
-			{children}
-		</ActorsContext.Provider>
-	);
+  return (
+    <ActorsContext.Provider
+      value={{
+        actors,
+        getActorsFromService,
+        getActorsById,
+        saveActor,
+        deleteActor,
+        editActor,
+      }}
+    >
+      {children}
+    </ActorsContext.Provider>
+  );
 };
