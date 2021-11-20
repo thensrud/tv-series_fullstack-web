@@ -9,6 +9,7 @@ import { To, useNavigate } from "react-router-dom";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { IEpisode } from "../../interfaces/IEpisode";
 import { IInSeries } from "../../interfaces/IInSeries";
+import { IGenre } from "../../interfaces/IGenre";
 
 const SeriesDetails: FC = () => {
   const { id } = useParams();
@@ -81,6 +82,12 @@ const SeriesDetails: FC = () => {
     });
   };
 
+  const getGenres = () => {
+    return series?.genre?.map((genre: IGenre, key: number) => {
+      return <p key={key}>{genre.name}</p>;
+    });
+  };
+
   return (
     <section>
       <h2 className="mb-3">{series?.name}</h2>
@@ -93,6 +100,7 @@ const SeriesDetails: FC = () => {
       <p>{series?.plot}</p>
       <h4 className="mb-3 mt-4">Episodes:</h4>
       <div>{renderEpisodes()}</div>
+      <h4>Genres: {getGenres()}</h4>
       <Button
         className="mt-4"
         onClick={() => handleClick(`/edit-series/${id}`)}
