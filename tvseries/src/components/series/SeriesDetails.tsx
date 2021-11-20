@@ -50,6 +50,9 @@ const SeriesDetails: FC = () => {
                 />
                 <Card.Body>
                   <Card.Title>{actor.name}</Card.Title>
+                  <Card.Subtitle>
+                    Has starred in {amountOfFeaturedActors} series
+                  </Card.Subtitle>
                 </Card.Body>
 
                 <Button

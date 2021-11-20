@@ -27,7 +27,7 @@ const MovieDetails: FC = () => {
   }, []);
 
   const getGenres = () => {
-    return movie?.genres?.map((genre: IGenre, key: number) => {
+    return movie?.genre?.map((genre: IGenre, key: number) => {
       return <p key={key}>{genre.name}</p>;
     });
   };
@@ -56,6 +56,9 @@ const MovieDetails: FC = () => {
                 />
                 <Card.Body>
                   <Card.Title>{actor.name}</Card.Title>
+                  <Card.Subtitle>
+                    Has starred in {amountOfFeaturedActors} movies
+                  </Card.Subtitle>
                 </Card.Body>
 
                 <Button
@@ -85,11 +88,6 @@ const MovieDetails: FC = () => {
         <h4>Plot: {movie?.plot}</h4>
         <h4>Genres: {getGenres()}</h4>
       </article>
-
-      <Button
-        className="mt-4"
-        onClick={() => handleClick(`/edit-movies/${id}`)}
-      ></Button>
       <h4 className="mt-4">Actors featured in this movie:</h4>
       <Row>{createInActorsList()}</Row>
     </section>
