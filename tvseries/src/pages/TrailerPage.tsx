@@ -1,5 +1,4 @@
 import { FC } from "react";
-import TrailerItem from "../components/trailer/TrailerItem";
 import TrailerList from "../components/trailer/TrailerList";
 
 const TrailerPage: FC = () => {
