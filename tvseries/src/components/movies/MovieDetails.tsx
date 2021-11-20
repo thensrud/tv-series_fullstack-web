@@ -1,14 +1,14 @@
-import { FC, useContext, useEffect, useState } from "react";
-import { Button, Card, Col, Row } from "react-bootstrap";
-import { useParams } from "react-router";
-import { ActorsContext } from "../../contexts/ActorsContext";
-import { MoviesContext } from "../../contexts/MoviesContext";
-import { IGenre } from "../../interfaces/IGenre";
-import { IMovies } from "../../interfaces/IMovies";
-import { To, useNavigate } from "react-router-dom";
-import { ActorsContextType } from "../../types/ActorsContextType";
-import { MoviesContextType } from "../../types/MoviesContextType";
-import { IInMovies } from "../../interfaces/IInMovie";
+import { FC, useContext, useEffect, useState } from 'react';
+import { Button, Card, Col, Row } from 'react-bootstrap';
+import { useParams } from 'react-router';
+import { ActorsContext } from '../../contexts/ActorsContext';
+import { MoviesContext } from '../../contexts/MoviesContext';
+import { IGenre } from '../../interfaces/IGenre';
+import { IMovies } from '../../interfaces/IMovies';
+import { To, useNavigate } from 'react-router-dom';
+import { ActorsContextType } from '../../types/ActorsContextType';
+import { MoviesContextType } from '../../types/MoviesContextType';
+import { IInMovies } from '../../interfaces/IInMovie';
 
 const MovieDetails: FC = () => {
   const { id } = useParams();
@@ -44,13 +44,13 @@ const MovieDetails: FC = () => {
       let featuringIn = actor.inMovies;
       // Mapping through all movies an actor has featured in
       return featuringIn?.map((mName: IInMovies, key: number) => {
-        if (mName.name === movie?.name) {
+        if (mName.name.toLowerCase() === movie?.name.toLowerCase()) {
           amountOfFeaturedActors += 1;
           return (
-            <Col className="mt-1" sm={6} md={4} lg={3} xl={2} key={key}>
-              <Card className="mini-card">
+            <Col className='mt-1' sm={6} md={4} lg={3} xl={2} key={key}>
+              <Card className='mini-card'>
                 <Card.Img
-                  variant="top"
+                  variant='top'
                   src={`https://localhost:5001/images/${actor?.image}`}
                   alt={actor?.name}
                 />
@@ -62,7 +62,7 @@ const MovieDetails: FC = () => {
                 </Card.Body>
 
                 <Button
-                  variant="primary"
+                  variant='primary'
                   onClick={() => handleClick(`/actors-details/${actor.id}`)}
                 >
                   Read more
@@ -82,13 +82,13 @@ const MovieDetails: FC = () => {
       <img
         src={`https://localhost:5001/images/${movie?.image}`}
         alt={movie?.name}
-        width="400"
+        width='400'
       />
       <article>
         <h4>Plot: {movie?.plot}</h4>
         <h4>Genres: {getGenres()}</h4>
       </article>
-      <h4 className="mt-4">Actors featured in this movie:</h4>
+      <h4 className='mt-4'>Actors featured in this movie:</h4>
       <Row>{createInActorsList()}</Row>
     </section>
   );
