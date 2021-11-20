@@ -1,9 +1,9 @@
-import { IGenre } from './IGenre';
+import { IGenre } from "./IGenre";
 
 export interface IMovies {
-	id?: string;
-	name: string;
-	image: string;
-	genres?: IGenre[];
-	plot: string;
+  id?: string;
+  name: string;
+  image: string;
+  genre?: IGenre[];
+  plot: string;
 }

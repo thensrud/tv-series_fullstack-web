@@ -1,11 +1,11 @@
-import React, { FC, useContext } from 'react';
-import { Button, Card } from 'react-bootstrap';
-import { To, useNavigate } from 'react-router-dom';
-import { MoviesContext } from '../../contexts/MoviesContext';
-import { IMovies } from '../../interfaces/IMovies';
-import { MoviesContextType } from '../../types/MoviesContextType';
+import React, { FC, useContext } from "react";
+import { Button, Card } from "react-bootstrap";
+import { To, useNavigate } from "react-router-dom";
+import { MoviesContext } from "../../contexts/MoviesContext";
+import { IMovies } from "../../interfaces/IMovies";
+import { MoviesContextType } from "../../types/MoviesContextType";
 
-const MovieItem: FC<IMovies> = ({ id, name, image, plot, genres }) => {
+const MovieItem: FC<IMovies> = ({ id, name, image, plot, genre }) => {
   const { deleteMovies } = useContext(MoviesContext) as MoviesContextType;
 
   const navigate = useNavigate();
@@ -29,24 +29,25 @@ const MovieItem: FC<IMovies> = ({ id, name, image, plot, genres }) => {
   return (
     <Card>
       <Card.Img
-        style={{ height: '250px' }}
-        variant='top'
+        style={{ height: "250px" }}
+        variant="top"
         src={`https://localhost:5001/images/${image}`}
         alt={name}
       />
       <Card.Body>
         <Card.Title>{name}</Card.Title>
-        <Card.Subtitle className='pb-3'>{genres}</Card.Subtitle>
+        {/*genres under her  */}
+        <Card.Subtitle className="pb-3"></Card.Subtitle>
         <Card.Text>{plot}</Card.Text>
       </Card.Body>
-      <div className='d-grid m-1 gap-1'>
+      <div className="d-grid m-1 gap-1">
         <Button
-          variant='primary'
+          variant="primary"
           onClick={() => handleClick(`/movies-details/${id}`)}
         >
           Read more
         </Button>
-        <Button variant='outline-danger' onClick={removeMovie}>
+        <Button variant="outline-danger" onClick={removeMovie}>
           Delete
         </Button>
       </div>
