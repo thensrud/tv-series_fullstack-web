@@ -26,7 +26,7 @@ Our backend is built with the following languages and plugins
 #### Frontend: 
 * Navigate to \tv-series_fullstack-web\tvseries in any command line interface
 * Type "npm i" while inside the path mentioned above to execute installation of required npm packages
-* Type "npm start" after the installation is finished
+* Type "npm start" after the installation is finished to initialize the frontend
 
 ### Default ports:
 - The backend runs on port 5001
