@@ -21,46 +21,29 @@ namespace TVSeriesAPI.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public ActionResult SaveImage(IFormFile file) // kan være bra å sjekke om det faktisk er et bilde
+        public ActionResult SaveImage(IFormFile file) 
         {
             string webRootPath = _hosting.WebRootPath;
-            // ikke anbefalt å bruke originale bildenavn, bør gjøre noe endring
-            string absolutePath = Path.Combine($"{webRootPath}/images/{file.FileName}");
-            //string untrustedFileName = Path.GetFileName(Path.Combine($"{webRootPath}/images/{file.FileName}"));
-
+            // Manipulates the image ID and adds the filetype to the end
+            string imageFilename = $"{System.Guid.NewGuid()}.{file.ContentType.Substring(file.ContentType.LastIndexOf("/") + 1)}";
+            string absolutePath = Path.Combine($"{webRootPath}/images/{imageFilename}");
+            
             try
             {
+                 // Returns nothing if uploaded file isn't an image
+                if( !FormFileExtensions.IsImage(file) ) {
+                    return BadRequest();
+            }
                 using (var fileStream = new FileStream(absolutePath, FileMode.Create))
                 {
                     file.CopyTo(fileStream);
                 }
-                return StatusCode(201);
+                return Content(imageFilename); 
             }
             catch
             {
                 return StatusCode(500);
             }
         }
-
-        // public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> files)
-        // {
-        //     long size = files.Sum(f => f.Length);
-
-        //     foreach (var formFile in files)
-        //     {
-        //         if (formFile.Length > 0)
-        //         {
-        //             var filePath = Path.GetTempFileName();
-
-        //             using (var stream = System.IO.File.Create(filePath))
-        //             {
-        //                 await formFile.CopyToAsync(stream);
-        //             }
-        //         }
-        //     }
-
-        //     return Ok(new { count = files.Count, size });
-        // }
-
     }
 }
