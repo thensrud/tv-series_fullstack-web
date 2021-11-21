@@ -1,17 +1,13 @@
-import { FC } from "react";
-import { Card } from "react-bootstrap";
-import { ITrailer } from "../../interfaces/ITrailer";
+import { FC } from 'react';
+import { ITrailer } from '../../interfaces/ITrailer';
+import ReactPlayer from 'react-player';
 
 const TrailerItem: FC<ITrailer> = ({ id, link }) => {
-  return (
-    <Card>
-      <Card.Body>
-        <Card.Title>{link}</Card.Title>
-        <Card.Subtitle>{link}</Card.Subtitle>
-        <Card.Text>{link}</Card.Text>
-      </Card.Body>
-    </Card>
-  );
+	return (
+		<div className="mt-4">
+			<ReactPlayer url={link} />
+		</div>
+	);
 };
 
 export default TrailerItem;
