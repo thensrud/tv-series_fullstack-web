@@ -28,8 +28,7 @@ const CreateSeriesForm: FC = () => {
   const { saveSeries } = useContext(SeriesContext) as SeriesContextType;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    let { name } = event.target;
-    let { value } = event.target;
+    let { name, value, checked } = event.target;
 
     switch (name) {
       case "seriesName":
@@ -42,8 +41,17 @@ const CreateSeriesForm: FC = () => {
           setNewImage(files[0]);
         }
         break;
-      case "genre":
-        setNewGenreName(value);
+      case "Action":
+      case "Adventure":
+      case "Sci-Fi":
+      case "Comedy":
+      case "Romance":
+      case "Horror":
+      case "Thriller":
+      case "Drama":
+        if (checked) {
+          setNewGenreName(name);
+        }
         break;
       case "episodeName":
         setNewEpisodeName(value);
@@ -58,11 +66,6 @@ const CreateSeriesForm: FC = () => {
         setNewSeries({ ...newSeries, plot: value });
         break;
     }
-  };
-
-  const addNewGenre = () => {
-    setNewGenre([...newGenre, { name: newGenreName }]);
-    setNewGenreName("");
   };
 
   useEffect(() => {
@@ -128,9 +131,57 @@ const CreateSeriesForm: FC = () => {
     setNewEpisode([]);
   };
 
+  useEffect(() => {
+    setNewGenre([...newGenre, { name: newGenreName }]);
+    console.log("HERE " + newGenreName);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [newGenreName]);
+
+  const genres = [
+    {
+      name: "Action",
+    },
+    {
+      name: "Adventure",
+    },
+    {
+      name: "Sci-Fi",
+    },
+    {
+      name: "Comedy",
+    },
+    {
+      name: "Romance",
+    },
+    {
+      name: "Horror",
+    },
+    {
+      name: "Thriller",
+    },
+    {
+      name: "Drama",
+    },
+  ];
+
+  const listGenresCheckbox = () => {
+    return genres.map((genre, key) => {
+      return (
+        <Form.Check
+          inline
+          label={genre.name}
+          name={genre.name}
+          type="checkbox"
+          key={key}
+          onChange={handleChange}
+        />
+      );
+    });
+  };
+
   return (
     <>
-      {/* Serienavn */}
+      {/* Series Name */}
       <FloatingLabel
         className="input-label"
         controlId="seriesName"
@@ -144,12 +195,14 @@ const CreateSeriesForm: FC = () => {
           value={newSeries.name}
         />
       </FloatingLabel>
-      {/* Bilde */}
+
+      {/* Image */}
       <Form.Group controlId="seriesImage" className="mb-3 mt-3">
         <Form.Label>Series image</Form.Label>
         <Form.Control onChange={handleChange} name="image" type="file" />
       </Form.Group>
-      {/* Plott */}
+
+      {/* Plot */}
       <FloatingLabel className="input-label" controlId="plot" label="Plot">
         <Form.Control
           onChange={handleChange}
@@ -162,34 +215,14 @@ const CreateSeriesForm: FC = () => {
           value={newSeries.plot}
         />
       </FloatingLabel>
-      {/* Sjanger */}
-      <FloatingLabel className="input-label" controlId="genre" label="Genre">
-        <Form.Control
-          onChange={handleChange}
-          name="genre"
-          type="text"
-          placeholder="Horror? Fantasy?"
-          value={newGenreName}
-        />
-      </FloatingLabel>
-      {/* Legge til sjanger */}
-      {newGenreName ? (
-        <Button
-          onClick={addNewGenre}
-          className="my-3"
-          variant="secondary"
-          type="submit"
-        >
-          Add this genre
-        </Button>
-      ) : (
-        <Button className="my-3" variant="secondary" type="submit" disabled>
-          Add this genre
-        </Button>
-      )}
-      {/* Liste alle sjangre lagt til */}
+
+      {/* Genre */}
+      <div className="mb-3">{listGenresCheckbox()}</div>
+
+      {/* List all genres added */}
       <p className="mt-1">Genres added: {listGenres()}</p>
-      {/* Episodenavn, sesongnummer og episodenummer */}
+
+      {/* Episodename, seasonnumber og episodenumber */}
       <FloatingLabel
         className="mb-3 input-label"
         controlId="episodeName"
@@ -235,7 +268,8 @@ const CreateSeriesForm: FC = () => {
           </FloatingLabel>
         </Col>
       </Row>
-      {/* Legge til ny episode */}
+
+      {/* Add new episode */}
       {newEpisodeName && newSeasonNumber && newEpisodeNumber ? (
         <Button
           onClick={addNewEpisode}
@@ -250,9 +284,11 @@ const CreateSeriesForm: FC = () => {
           Add episode
         </Button>
       )}
-      {/* Liste alle episoder lagt til */}
+
+      {/* List all episodes added */}
       <p className="mt-1">Episodes added: {listEpisodes()}</p>
-      {/* Poste ny serie */}
+
+      {/* Post new series */}
       <Button
         className="mt-3"
         onClick={postNewSeries}
