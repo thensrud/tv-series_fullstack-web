@@ -1,25 +1,26 @@
-import React, { FC, ChangeEvent, useState, useEffect, useContext } from "react";
-import { seriesService } from "../../services/seriesService";
-import { ISeries } from "../../interfaces/ISeries";
-import { Badge, Button, Col, FloatingLabel, Form, Row } from "react-bootstrap";
-import { IGenre } from "../../interfaces/IGenre";
-import { IEpisode } from "../../interfaces/IEpisode";
-import { SeriesContext } from "../../contexts/SeriesContext";
-import { SeriesContextType } from "../../types/SeriesContextType";
+import React, { FC, ChangeEvent, useState, useEffect, useContext } from 'react';
+import { seriesService } from '../../services/seriesService';
+import { ISeries } from '../../interfaces/ISeries';
+import { Badge, Button, Col, FloatingLabel, Form, Row } from 'react-bootstrap';
+import { IGenre } from '../../interfaces/IGenre';
+import { IEpisode } from '../../interfaces/IEpisode';
+import { SeriesContext } from '../../contexts/SeriesContext';
+import { SeriesContextType } from '../../types/SeriesContextType';
+import PostToast from '../shared/PostToast';
 
 const CreateSeriesForm: FC = () => {
-  const [newGenreName, setNewGenreName] = useState<string>("");
-  const [newEpisodeName, setNewEpisodeName] = useState<string>("");
-  const [newSeasonNumber, setNewSeasonNumber] = useState<string>("");
-  const [newEpisodeNumber, setNewEpisodeNumber] = useState<string>("");
+  const [newGenreName, setNewGenreName] = useState<string>('');
+  const [newEpisodeName, setNewEpisodeName] = useState<string>('');
+  const [newSeasonNumber, setNewSeasonNumber] = useState<string>('');
+  const [newEpisodeNumber, setNewEpisodeNumber] = useState<string>('');
   const [newGenre, setNewGenre] = useState<IGenre[]>([]);
   const [newEpisode, setNewEpisode] = useState<IEpisode[]>([]);
 
   const [newSeries, setNewSeries] = useState<ISeries>({
-    name: "",
-    image: "",
+    name: '',
+    image: '',
     genre: newGenre,
-    plot: "",
+    plot: '',
     episodes: newEpisode,
   });
 
@@ -31,38 +32,38 @@ const CreateSeriesForm: FC = () => {
     let { name, value, checked } = event.target;
 
     switch (name) {
-      case "seriesName":
+      case 'seriesName':
         setNewSeries({ ...newSeries, name: value });
         break;
-      case "image":
+      case 'image':
         let { files } = event.target;
         if (files) {
           setNewSeries({ ...newSeries, image: files[0].name });
           setNewImage(files[0]);
         }
         break;
-      case "Action":
-      case "Adventure":
-      case "Sci-Fi":
-      case "Comedy":
-      case "Romance":
-      case "Horror":
-      case "Thriller":
-      case "Drama":
+      case 'Action':
+      case 'Adventure':
+      case 'Sci-Fi':
+      case 'Comedy':
+      case 'Romance':
+      case 'Horror':
+      case 'Thriller':
+      case 'Drama':
         if (checked) {
           setNewGenreName(name);
         }
         break;
-      case "episodeName":
+      case 'episodeName':
         setNewEpisodeName(value);
         break;
-      case "seasonNumber":
+      case 'seasonNumber':
         setNewSeasonNumber(value);
         break;
-      case "episodeNumber":
+      case 'episodeNumber':
         setNewEpisodeNumber(value);
         break;
-      case "plot":
+      case 'plot':
         setNewSeries({ ...newSeries, plot: value });
         break;
     }
@@ -82,9 +83,9 @@ const CreateSeriesForm: FC = () => {
         episodeNumber: newEpisodeNumber,
       },
     ]);
-    setNewEpisodeName("");
-    setNewSeasonNumber("");
-    setNewEpisodeNumber("");
+    setNewEpisodeName('');
+    setNewSeasonNumber('');
+    setNewEpisodeNumber('');
   };
 
   useEffect(() => {
@@ -95,7 +96,7 @@ const CreateSeriesForm: FC = () => {
   const listGenres = () => {
     return newGenre.map((genre: IGenre, key: number) => {
       return (
-        <Badge className="mx-1" bg="secondary" key={key}>
+        <Badge className='mx-1' bg='secondary' key={key}>
           {genre.name}
         </Badge>
       );
@@ -105,62 +106,75 @@ const CreateSeriesForm: FC = () => {
   const listEpisodes = () => {
     return newEpisode.map((episode: IEpisode, key: number) => {
       return (
-        <Badge className="mx-1" bg="secondary" key={key}>
+        <Badge className='mx-1' bg='secondary' key={key}>
           {`"${episode.name}" as episode ${episode.episodeNumber} in season ${episode.seasonNumber}`}
         </Badge>
       );
     });
   };
 
+  /* Functionality to trigger toast upon uploading */
+
+  const [showToast, setShowToast] = useState<boolean>(false);
+
+  useEffect(() => {
+    let timeout: any;
+    if (showToast) {
+      timeout = setTimeout(() => setShowToast(false), 4000);
+    }
+    return () => clearTimeout(timeout);
+  }, [showToast]);
+
   const postNewSeries = () => {
     seriesService.postSeries(newSeries, newImage as File);
     saveSeries(newSeries);
 
     setNewSeries({
-      name: "",
-      image: "",
+      name: '',
+      image: '',
       genre: [],
-      plot: "",
+      plot: '',
       episodes: [],
     });
-    setNewGenreName("");
-    setNewEpisodeName("");
-    setNewSeasonNumber("");
-    setNewEpisodeNumber("");
+    setNewGenreName('');
+    setNewEpisodeName('');
+    setNewSeasonNumber('');
+    setNewEpisodeNumber('');
     setNewGenre([]);
     setNewEpisode([]);
+    setShowToast(true);
   };
 
   useEffect(() => {
     setNewGenre([...newGenre, { name: newGenreName }]);
-    console.log("HERE " + newGenreName);
+    console.log('HERE ' + newGenreName);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newGenreName]);
 
   const genres = [
     {
-      name: "Action",
+      name: 'Action',
     },
     {
-      name: "Adventure",
+      name: 'Adventure',
     },
     {
-      name: "Sci-Fi",
+      name: 'Sci-Fi',
     },
     {
-      name: "Comedy",
+      name: 'Comedy',
     },
     {
-      name: "Romance",
+      name: 'Romance',
     },
     {
-      name: "Horror",
+      name: 'Horror',
     },
     {
-      name: "Thriller",
+      name: 'Thriller',
     },
     {
-      name: "Drama",
+      name: 'Drama',
     },
   ];
 
@@ -171,7 +185,7 @@ const CreateSeriesForm: FC = () => {
           inline
           label={genre.name}
           name={genre.name}
-          type="checkbox"
+          type='checkbox'
           key={key}
           onChange={handleChange}
         />
@@ -183,86 +197,86 @@ const CreateSeriesForm: FC = () => {
     <>
       {/* Series Name */}
       <FloatingLabel
-        className="input-label"
-        controlId="seriesName"
-        label="Series name"
+        className='input-label'
+        controlId='seriesName'
+        label='Series name'
       >
         <Form.Control
           onChange={handleChange}
-          name="seriesName"
-          type="text"
-          placeholder="What is the series called?"
+          name='seriesName'
+          type='text'
+          placeholder='What is the series called?'
           value={newSeries.name}
         />
       </FloatingLabel>
 
       {/* Image */}
-      <Form.Group controlId="seriesImage" className="mb-3 mt-3">
+      <Form.Group controlId='seriesImage' className='mb-3 mt-3'>
         <Form.Label>Series image</Form.Label>
-        <Form.Control onChange={handleChange} name="image" type="file" />
+        <Form.Control onChange={handleChange} name='image' type='file' />
       </Form.Group>
 
       {/* Plot */}
-      <FloatingLabel className="input-label" controlId="plot" label="Plot">
+      <FloatingLabel className='input-label' controlId='plot' label='Plot'>
         <Form.Control
           onChange={handleChange}
-          className="mb-3"
-          as="textarea"
-          style={{ height: "100px" }}
-          name="plot"
-          type="text"
-          placeholder="Once upon a time..."
+          className='mb-3'
+          as='textarea'
+          style={{ height: '100px' }}
+          name='plot'
+          type='text'
+          placeholder='Once upon a time...'
           value={newSeries.plot}
         />
       </FloatingLabel>
 
       {/* Genre */}
-      <div className="mb-3">{listGenresCheckbox()}</div>
+      <div className='mb-3'>{listGenresCheckbox()}</div>
 
       {/* List all genres added */}
-      <p className="mt-1">Genres added: {listGenres()}</p>
+      <p className='mt-1'>Genres added: {listGenres()}</p>
 
       {/* Episodename, seasonnumber og episodenumber */}
       <FloatingLabel
-        className="mb-3 input-label"
-        controlId="episodeName"
-        label="Episode name"
+        className='mb-3 input-label'
+        controlId='episodeName'
+        label='Episode name'
       >
         <Form.Control
           onChange={handleChange}
-          name="episodeName"
-          type="text"
-          placeholder="Episode name"
+          name='episodeName'
+          type='text'
+          placeholder='Episode name'
           value={newEpisodeName}
         />
       </FloatingLabel>
       <Row>
         <Col>
           <FloatingLabel
-            className="input-label"
-            controlId="seasonNumber"
-            label="Season number"
+            className='input-label'
+            controlId='seasonNumber'
+            label='Season number'
           >
             <Form.Control
               onChange={handleChange}
-              name="seasonNumber"
-              type="text"
-              placeholder="Which season is this?"
+              name='seasonNumber'
+              type='text'
+              placeholder='Which season is this?'
               value={newSeasonNumber}
             />
           </FloatingLabel>
         </Col>
         <Col>
           <FloatingLabel
-            className="input-label"
-            controlId="episodeNumber"
-            label="Episode number"
+            className='input-label'
+            controlId='episodeNumber'
+            label='Episode number'
           >
             <Form.Control
               onChange={handleChange}
-              name="episodeNumber"
-              type="text"
-              placeholder="Episode number?"
+              name='episodeNumber'
+              type='text'
+              placeholder='Episode number?'
               value={newEpisodeNumber}
             />
           </FloatingLabel>
@@ -273,30 +287,31 @@ const CreateSeriesForm: FC = () => {
       {newEpisodeName && newSeasonNumber && newEpisodeNumber ? (
         <Button
           onClick={addNewEpisode}
-          className="my-3"
-          variant="secondary"
-          type="submit"
+          className='my-3'
+          variant='secondary'
+          type='submit'
         >
           Add episode
         </Button>
       ) : (
-        <Button className="my-3" variant="secondary" type="submit" disabled>
+        <Button className='my-3' variant='secondary' type='submit' disabled>
           Add episode
         </Button>
       )}
 
       {/* List all episodes added */}
-      <p className="mt-1">Episodes added: {listEpisodes()}</p>
+      <p className='mt-1'>Episodes added: {listEpisodes()}</p>
 
       {/* Post new series */}
       <Button
-        className="mt-3"
+        className='mt-3'
         onClick={postNewSeries}
-        variant="primary"
-        type="submit"
+        variant='primary'
+        type='submit'
       >
         Submit new series
       </Button>
+      {showToast && <PostToast />}
     </>
   );
 };

@@ -1,47 +1,48 @@
-import React, { ChangeEvent, FC, useEffect, useState } from "react";
-import { Badge, Button, FloatingLabel, Form } from "react-bootstrap";
-import { IGenre } from "../../interfaces/IGenre";
-import { IMovies } from "../../interfaces/IMovies";
-import { moviesService } from "../../services/moviesService";
+import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import { Badge, Button, FloatingLabel, Form } from 'react-bootstrap';
+import { IGenre } from '../../interfaces/IGenre';
+import { IMovies } from '../../interfaces/IMovies';
+import { moviesService } from '../../services/moviesService';
+import PostToast from '../shared/PostToast';
 
 const CreateMovieForm: FC = () => {
-  const [newGenreName, setNewGenreName] = useState<string>("");
+  const [newGenreName, setNewGenreName] = useState<string>('');
   const [newGenre, setNewGenre] = useState<IGenre[]>([]);
   const [newImage, setNewImage] = useState<File>();
   const [newMovie, setNewMovie] = useState<IMovies>({
-    name: "",
-    image: "",
+    name: '',
+    image: '',
     genre: newGenre,
-    plot: "",
+    plot: '',
   });
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     let { name, value, checked } = event.target;
 
     switch (name) {
-      case "movieName":
+      case 'movieName':
         setNewMovie({ ...newMovie, name: value });
         break;
-      case "image":
+      case 'image':
         let { files } = event.target;
         if (files) {
           setNewMovie({ ...newMovie, image: files[0].name });
           setNewImage(files[0]);
         }
         break;
-      case "Action":
-      case "Adventure":
-      case "Sci-Fi":
-      case "Comedy":
-      case "Romance":
-      case "Horror":
-      case "Thriller":
-      case "Drama":
+      case 'Action':
+      case 'Adventure':
+      case 'Sci-Fi':
+      case 'Comedy':
+      case 'Romance':
+      case 'Horror':
+      case 'Thriller':
+      case 'Drama':
         if (checked) {
           setNewGenreName(name);
         }
         break;
-      case "plot":
+      case 'plot':
         setNewMovie({ ...newMovie, plot: value });
         break;
       default:
@@ -57,56 +58,69 @@ const CreateMovieForm: FC = () => {
   const listGenres = () => {
     return newGenre.map((genre: IGenre, key: number) => {
       return (
-        <Badge className="mx-1" bg="secondary" key={key}>
+        <Badge className='mx-1' bg='secondary' key={key}>
           {genre.name}
         </Badge>
       );
     });
   };
 
+  /* Functionality to trigger toast upon uploading */
+
+  const [showToast, setShowToast] = useState<boolean>(false);
+
+  useEffect(() => {
+    let timeout: any;
+    if (showToast) {
+      timeout = setTimeout(() => setShowToast(false), 4000);
+    }
+    return () => clearTimeout(timeout);
+  }, [showToast]);
+
   const postNewMovie = () => {
     moviesService.postMovies(newMovie, newImage as File);
 
     setNewMovie({
-      name: "",
-      image: "",
+      name: '',
+      image: '',
       genre: [],
-      plot: "",
+      plot: '',
     });
-    setNewGenreName("");
+    setNewGenreName('');
     setNewGenre([]);
+    setShowToast(true);
   };
 
   useEffect(() => {
     setNewGenre([...newGenre, { name: newGenreName }]);
-    console.log("HERE " + newGenreName);
+    console.log('HERE ' + newGenreName);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newGenreName]);
 
   const genres = [
     {
-      name: "Action",
+      name: 'Action',
     },
     {
-      name: "Adventure",
+      name: 'Adventure',
     },
     {
-      name: "Sci-Fi",
+      name: 'Sci-Fi',
     },
     {
-      name: "Comedy",
+      name: 'Comedy',
     },
     {
-      name: "Romance",
+      name: 'Romance',
     },
     {
-      name: "Horror",
+      name: 'Horror',
     },
     {
-      name: "Thriller",
+      name: 'Thriller',
     },
     {
-      name: "Drama",
+      name: 'Drama',
     },
   ];
 
@@ -117,7 +131,7 @@ const CreateMovieForm: FC = () => {
           inline
           label={genre.name}
           name={genre.name}
-          type="checkbox"
+          type='checkbox'
           key={key}
           onChange={handleChange}
         />
@@ -129,54 +143,55 @@ const CreateMovieForm: FC = () => {
     <div>
       {/* Movie name */}
       <FloatingLabel
-        className="input-label"
-        controlId="movieName"
-        label="Movie name"
+        className='input-label'
+        controlId='movieName'
+        label='Movie name'
       >
         <Form.Control
           onChange={handleChange}
-          name="movieName"
-          type="text"
-          placeholder="Movie name"
+          name='movieName'
+          type='text'
+          placeholder='Movie name'
           value={newMovie.name}
         />
       </FloatingLabel>
 
       {/* Image */}
-      <Form.Group controlId="movieImage" className="mb-3 mt-3">
+      <Form.Group controlId='movieImage' className='mb-3 mt-3'>
         <Form.Label>Movie image</Form.Label>
-        <Form.Control onChange={handleChange} name="image" type="file" />
+        <Form.Control onChange={handleChange} name='image' type='file' />
       </Form.Group>
 
       {/* Plot */}
-      <FloatingLabel className="input-label" controlId="plot" label="Plot">
+      <FloatingLabel className='input-label' controlId='plot' label='Plot'>
         <Form.Control
           onChange={handleChange}
-          className="mb-3"
-          as="textarea"
-          style={{ height: "100px" }}
-          name="plot"
-          type="text"
-          placeholder="Once upon a time..."
+          className='mb-3'
+          as='textarea'
+          style={{ height: '100px' }}
+          name='plot'
+          type='text'
+          placeholder='Once upon a time...'
           value={newMovie.plot}
         />
       </FloatingLabel>
 
       {/* Genre */}
-      <div className="mb-3">{listGenresCheckbox()}</div>
+      <div className='mb-3'>{listGenresCheckbox()}</div>
 
       {/* List all genres added */}
-      <p className="mt-1">Genres added: {listGenres()}</p>
+      <p className='mt-1'>Genres added: {listGenres()}</p>
 
       {/* Post new movie */}
       <Button
-        className="mt-3"
+        className='mt-3'
         onClick={postNewMovie}
-        variant="primary"
-        type="submit"
+        variant='primary'
+        type='submit'
       >
         Submit new movie
       </Button>
+      {showToast && <PostToast />}
     </div>
   );
 };
