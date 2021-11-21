@@ -70,5 +70,3 @@ This is a database for series, movies and actors. You can see what is already in
 Our intention was to build a simplified version of IMDB where the user is able to interact with and contribute to the database of actors, series and movies by adding said resources through our frontend.
 
 We used Bootstrap to design both the header-navigation bar and the cards with content fetched from the database.
-
-#### Bugs and errors:
