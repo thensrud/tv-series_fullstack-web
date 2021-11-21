@@ -104,7 +104,6 @@ const CreateActorForm: FC = () => {
   };
 
   /* Functionality to trigger toast upon uploading */
-
   const [showToast, setShowToast] = useState<boolean>(false);
 
   useEffect(() => {

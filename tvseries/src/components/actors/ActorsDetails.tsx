@@ -17,7 +17,6 @@ const ActorsDetails: FC = () => {
   const { getActorsById } = useContext(ActorsContext) as ActorsContextType;
   const { series } = useContext(SeriesContext) as SeriesContextType;
   const { movies } = useContext(MoviesContext) as MoviesContextType;
-  // Trenger egentlig ikke state her, kan vaere statisk objekt
   const [actor, setActor] = useState<IActors>();
 
   useEffect(() => {

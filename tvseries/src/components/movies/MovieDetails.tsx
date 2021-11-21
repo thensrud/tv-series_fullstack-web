@@ -1,14 +1,14 @@
-import { FC, useContext, useEffect, useState } from "react";
-import { Badge, Button, Card, Col, Row } from "react-bootstrap";
-import { useParams } from "react-router";
-import { ActorsContext } from "../../contexts/ActorsContext";
-import { MoviesContext } from "../../contexts/MoviesContext";
-import { IGenre } from "../../interfaces/IGenre";
-import { IMovies } from "../../interfaces/IMovies";
-import { To, useNavigate } from "react-router-dom";
-import { ActorsContextType } from "../../types/ActorsContextType";
-import { MoviesContextType } from "../../types/MoviesContextType";
-import { IInMovies } from "../../interfaces/IInMovie";
+import { FC, useContext, useEffect, useState } from 'react';
+import { Badge, Button, Card, Col, Row } from 'react-bootstrap';
+import { useParams } from 'react-router';
+import { ActorsContext } from '../../contexts/ActorsContext';
+import { MoviesContext } from '../../contexts/MoviesContext';
+import { IGenre } from '../../interfaces/IGenre';
+import { IMovies } from '../../interfaces/IMovies';
+import { To, useNavigate } from 'react-router-dom';
+import { ActorsContextType } from '../../types/ActorsContextType';
+import { MoviesContextType } from '../../types/MoviesContextType';
+import { IInMovies } from '../../interfaces/IInMovie';
 
 const MovieDetails: FC = () => {
   const { id } = useParams();
@@ -42,10 +42,10 @@ const MovieDetails: FC = () => {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           amountOfFeaturedActors += 1;
           return (
-            <Col className="mt-1" sm={6} md={4} lg={3} xl={2} key={key}>
-              <Card className="mini-card">
+            <Col className='mt-1' sm={6} md={4} lg={3} xl={2} key={key}>
+              <Card className='mini-card'>
                 <Card.Img
-                  variant="top"
+                  variant='top'
                   src={`https://localhost:5001/images/${actor?.image}`}
                   alt={actor?.name}
                 />
@@ -54,7 +54,7 @@ const MovieDetails: FC = () => {
                 </Card.Body>
 
                 <Button
-                  variant="primary"
+                  variant='primary'
                   onClick={() => handleClick(`/actors-details/${actor.id}`)}
                 >
                   Read more
@@ -71,7 +71,7 @@ const MovieDetails: FC = () => {
   const createGenreList = () => {
     return movie?.genre?.map((movie: IGenre, key: number) => {
       return (
-        <Badge className="me-1" bg="secondary" key={key}>
+        <Badge className='me-1' bg='secondary' key={key}>
           {movie.name}
         </Badge>
       );
@@ -80,25 +80,17 @@ const MovieDetails: FC = () => {
 
   return (
     <>
-      <h2 className="mb-3">{movie?.name}</h2>
+      <h2 className='mb-3'>{movie?.name}</h2>
       <img
         src={`https://localhost:5001/images/${movie?.image}`}
-        style={{ height: "350px" }}
+        style={{ height: '350px' }}
         alt={movie?.name}
       />
-      <h4 className="mt-4">Genre(s):</h4>
+      <h4 className='mt-4'>Genre(s):</h4>
       {createGenreList()}
-      <h4 className="mb-3 mt-4">Plot:</h4>
+      <h4 className='mb-3 mt-4'>Plot:</h4>
       <p>{movie?.plot}</p>
-
-      {/* <Button
-				className="mt-4"
-				onClick={() => handleClick(`/edit-movies/${id}`)}
-			>
-				Edit Movies Info
-			</Button> */}
-
-      <h4 className="mt-4">Actors featured in this movie:</h4>
+      <h4 className='mt-4'>Actors featured in this movie:</h4>
       <Row>{createInActorsList()}</Row>
     </>
   );
