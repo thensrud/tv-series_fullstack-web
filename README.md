@@ -7,10 +7,10 @@
 
 ### Project Details:
 
-Our frontend is built with the following languages, frameworks and libraries/dependencies:
+Our frontend is built with the following languages, frameworks and libraries:
 - React
 - Typescript
-- React Bootstrap + Bootstrap, Prettier, React Player, Axios, React Router Dom
+- React Bootstrap + Bootstrap, React Player, Axios, React Router Dom
 
 Our backend is built with the following languages and plugins
 - .NET 
