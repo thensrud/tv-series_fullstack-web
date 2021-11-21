@@ -7,16 +7,15 @@
 
 ### Project Details:
 
-Our frontend is build with the following languages and frameworks:
+Our frontend is built with the following languages, frameworks and libraries:
 - React
 - Typescript
-- React Bootstrap + Bootstrap
-- Axios
+- React Bootstrap + Bootstrap, React Player, Axios, React Router Dom
 
 Our backend is built with the following languages and plugins
 - .NET 
 - C# Webapi
-- Mongo DB plugins for .NET C#.
+- MongoDB plugins for .NET C#.
 
 ## Initializing the front and backend
 #### Backend: 
@@ -30,13 +29,13 @@ Our backend is built with the following languages and plugins
 
 ### Default ports:
 - The backend runs on port 5001
-- The frontend runw on port 3000
+- The frontend runs on port 3000
 
-Make sure the mentioned ports are available before initializing the project
+Make sure the mentioned ports are available before initializing the project.
 
 ## Description:
 
-This is a database for series, movies and actors. You can see what is already in the MongoDB database by clicking on 'All Series', 'All Actors', 'All Movies', or 'Trailers'. You can also add new series, movies and actors! If there is a match between where an actor has starred and a corresponding series or movie, they should appear in the detailed page of that series or movie. The detailed actor page should also list in which series or movie the actor has starred.
+This is a database for series, movies and actors. You can see what is already in the MongoDB database by clicking on 'All Series', 'All Actors', 'All Movies', or 'Trailers'. You can also add new series, movies and actors! If there is a match between where an actor has starred and a corresponding series or movie, they should appear in the detailed page of that series or movie. The detailed actor page should also list in which series or movie the actor has starred. It is not possible to edit movies yet, or post new trailers.
 
 #### Actors has the following properties:
 - id: String
@@ -68,8 +67,8 @@ This is a database for series, movies and actors. You can see what is already in
 - link: String
 
 #### Design Choices:
-Our intention was to build a simplified version of IMDB where the user is able to interact with and contribute to the database of actors, series and movies by adding said resources through our front-end.
+Our intention was to build a simplified version of IMDB where the user is able to interact with and contribute to the database of actors, series and movies by adding said resources through our frontend.
 
-We used bootstrap to design both the header-navigation bar and the cards with content fetched from the database
+We used Bootstrap to design both the header-navigation bar and the cards with content fetched from the database.
 
 #### Bugs and errors:
