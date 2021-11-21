@@ -4,8 +4,10 @@ import { IGenre } from '../../interfaces/IGenre';
 import { IMovies } from '../../interfaces/IMovies';
 import { moviesService } from '../../services/moviesService';
 import { genres } from '../../data/genres';
+import PostToast from '../shared/PostToast';
 
 const CreateMovieForm: FC = () => {
+  const [showToast, setShowToast] = useState<boolean>(false);
 	const [newGenre, setNewGenre] = useState<IGenre[]>([]);
 	const [newImage, setNewImage] = useState<File>();
 	const [newMovie, setNewMovie] = useState<IMovies>({
@@ -14,6 +16,15 @@ const CreateMovieForm: FC = () => {
 		genre: newGenre,
 		plot: '',
 	});
+
+  /* Functionality to trigger toast upon uploading */
+  useEffect(() => {
+    let timeout: any;
+    if (showToast) {
+      timeout = setTimeout(() => setShowToast(false), 4000);
+    }
+    return () => clearTimeout(timeout);
+  }, [showToast]);
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		let { name, value, checked } = event.target;
@@ -79,6 +90,7 @@ const CreateMovieForm: FC = () => {
 			plot: '',
 		});
 		setNewGenre([]);
+    setShowToast(true);
 	};
 
 	const listGenresCheckbox = () => {
@@ -148,6 +160,7 @@ const CreateMovieForm: FC = () => {
 			>
 				Submit new movie
 			</Button>
+      {showToast && <PostToast />}
 		</div>
 	);
 };

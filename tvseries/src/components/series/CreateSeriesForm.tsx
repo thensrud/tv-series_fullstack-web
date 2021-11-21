@@ -7,6 +7,7 @@ import { IEpisode } from '../../interfaces/IEpisode';
 import { SeriesContext } from '../../contexts/SeriesContext';
 import { SeriesContextType } from '../../types/SeriesContextType';
 import { genres } from '../../data/genres';
+import PostToast from '../shared/PostToast';
 
 const CreateSeriesForm: FC = () => {
 	const [newEpisodeName, setNewEpisodeName] = useState<string>('');
@@ -14,6 +15,7 @@ const CreateSeriesForm: FC = () => {
 	const [newEpisodeNumber, setNewEpisodeNumber] = useState<string>('');
 	const [newGenre, setNewGenre] = useState<IGenre[]>([]);
 	const [newEpisode, setNewEpisode] = useState<IEpisode[]>([]);
+  const [showToast, setShowToast] = useState<boolean>(false);
 
 	const [newSeries, setNewSeries] = useState<ISeries>({
 		name: '',
@@ -29,7 +31,7 @@ const CreateSeriesForm: FC = () => {
 
 	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		let { name, value, checked } = event.target;
-
+    
 		switch (name) {
 			case 'seriesName':
 				setNewSeries({ ...newSeries, name: value });
@@ -97,6 +99,15 @@ const CreateSeriesForm: FC = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [newEpisode]);
 
+  /* Functionality to trigger toast upon uploading */
+  useEffect(() => {
+    let timeout: any;
+    if (showToast) {
+      timeout = setTimeout(() => setShowToast(false), 4000);
+    }
+    return () => clearTimeout(timeout);
+  }, [showToast]);
+    
 	const listGenres = () => {
 		return newGenre.map((genre: IGenre, key: number) => {
 			return (
@@ -133,6 +144,7 @@ const CreateSeriesForm: FC = () => {
 		setNewEpisodeNumber('');
 		setNewGenre([]);
 		setNewEpisode([]);
+    setShowToast(true);
 	};
 
 	const listGenresCheckbox = () => {
@@ -268,6 +280,7 @@ const CreateSeriesForm: FC = () => {
 			>
 				Submit new series
 			</Button>
+      {showToast && <PostToast />}
 		</>
 	);
 };
