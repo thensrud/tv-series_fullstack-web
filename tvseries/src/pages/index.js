@@ -11,6 +11,7 @@ import MoviesDetailsPage from "./MoviesDetailsPage";
 import CreateMovie from "./CreateMovie";
 import EditSeriesPage from "./EditSeriesPage";
 import TrailerPage from "./TrailerPage";
+import NotFound from "./NotFound";
 
 export {
   AllSeries,
@@ -26,4 +27,5 @@ export {
   CreateMovie,
   EditSeriesPage,
   TrailerPage,
+  NotFound,
 };

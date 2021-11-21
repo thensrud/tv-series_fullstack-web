@@ -15,6 +15,7 @@ import {
   ActorsDetailsPage,
   SeriesDetailsPage,
   TrailerPage,
+  NotFound,
 } from "../pages";
 
 // Docs new router version: https://reactrouter.com/docs/en/v6/getting-started/tutorial
@@ -38,6 +39,7 @@ const Routing: FC = () => {
         <Route path="edit-actor/:id" element={<EditActorPage />} />
         <Route path="edit-series/:id" element={<EditSeriesPage />} />
         <Route path="trailer" element={<TrailerPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

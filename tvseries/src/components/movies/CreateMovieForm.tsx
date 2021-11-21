@@ -16,7 +16,7 @@ const CreateMovieForm: FC = () => {
   });
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    let { name, value } = event.target;
+    let { name, value, checked } = event.target;
 
     switch (name) {
       case "movieName":
@@ -29,8 +29,17 @@ const CreateMovieForm: FC = () => {
           setNewImage(files[0]);
         }
         break;
-      case "genre":
-        setNewGenreName(value);
+      case "Action":
+      case "Adventure":
+      case "Sci-Fi":
+      case "Comedy":
+      case "Romance":
+      case "Horror":
+      case "Thriller":
+      case "Drama":
+        if (checked) {
+          setNewGenreName(name);
+        }
         break;
       case "plot":
         setNewMovie({ ...newMovie, plot: value });
@@ -38,11 +47,6 @@ const CreateMovieForm: FC = () => {
       default:
         break;
     }
-  };
-
-  const addNewGenre = () => {
-    setNewGenre([...newGenre, { name: newGenreName }]);
-    setNewGenreName("");
   };
 
   useEffect(() => {
@@ -71,6 +75,54 @@ const CreateMovieForm: FC = () => {
     });
     setNewGenreName("");
     setNewGenre([]);
+  };
+
+  useEffect(() => {
+    setNewGenre([...newGenre, { name: newGenreName }]);
+    console.log("HERE " + newGenreName);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [newGenreName]);
+
+  const genres = [
+    {
+      name: "Action",
+    },
+    {
+      name: "Adventure",
+    },
+    {
+      name: "Sci-Fi",
+    },
+    {
+      name: "Comedy",
+    },
+    {
+      name: "Romance",
+    },
+    {
+      name: "Horror",
+    },
+    {
+      name: "Thriller",
+    },
+    {
+      name: "Drama",
+    },
+  ];
+
+  const listGenresCheckbox = () => {
+    return genres.map((genre, key) => {
+      return (
+        <Form.Check
+          inline
+          label={genre.name}
+          name={genre.name}
+          type="checkbox"
+          key={key}
+          onChange={handleChange}
+        />
+      );
+    });
   };
 
   return (
@@ -111,31 +163,7 @@ const CreateMovieForm: FC = () => {
       </FloatingLabel>
 
       {/* Genre */}
-      <FloatingLabel className="input-label" controlId="genre" label="Genre">
-        <Form.Control
-          onChange={handleChange}
-          name="genre"
-          type="text"
-          placeholder="Horror? Fantasy?"
-          value={newGenreName}
-        />
-      </FloatingLabel>
-
-      {/* Add new genre */}
-      {newGenreName ? (
-        <Button
-          onClick={addNewGenre}
-          className="my-3"
-          variant="secondary"
-          type="submit"
-        >
-          Add this genre
-        </Button>
-      ) : (
-        <Button className="my-3" variant="secondary" type="submit" disabled>
-          Add this genre
-        </Button>
-      )}
+      <div className="mb-3">{listGenresCheckbox()}</div>
 
       {/* List all genres added */}
       <p className="mt-1">Genres added: {listGenres()}</p>
