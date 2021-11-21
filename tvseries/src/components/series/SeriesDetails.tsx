@@ -19,6 +19,7 @@ const SeriesDetails: FC = () => {
   const [series, setSeries] = useState<ISeries>();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (id) {
       const _series = getSeriesById(id);
       setSeries(_series);

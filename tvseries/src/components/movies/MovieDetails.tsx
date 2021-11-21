@@ -19,6 +19,7 @@ const MovieDetails: FC = () => {
   const [movie, setMovie] = useState<IMovies>();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (id) {
       const _movie = getMoviesById(id);
       setMovie(_movie);

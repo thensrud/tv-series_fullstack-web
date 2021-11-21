@@ -20,6 +20,7 @@ const ActorsDetails: FC = () => {
   const [actor, setActor] = useState<IActors>();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (id) {
       const _actor = getActorsById(id);
       setActor(_actor);
