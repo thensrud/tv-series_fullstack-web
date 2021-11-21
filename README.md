@@ -72,4 +72,4 @@ Our intention was to build a simplified version of IMDB where the user is able t
 
 We used bootstrap to design both the header-navigation bar and the cards with content fetched from the database
 
-## Bugs and errors:
+#### Bugs and errors:
