@@ -52,13 +52,6 @@ const EditActor: FC = () => {
   const postEdit = () => {
     editActor(id, editedActor);
 
-    console.log(id, editedActor.age + ':     id    +    editedActor');
-    console.log(editedActor.name + ':   name');
-    console.log(editedActor.age + ':   age');
-    console.log(editedActor.country + ':   country');
-    console.log(editedActor.image + ':   image');
-    console.log(editedActor.inSeries?.[0] + ':   inSeries');
-
     setEditedActor({
       name: '',
       age: '',

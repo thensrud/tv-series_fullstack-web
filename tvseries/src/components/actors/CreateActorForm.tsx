@@ -110,7 +110,7 @@ const CreateActorForm: FC = () => {
   useEffect(() => {
     let timeout: any;
     if (showToast) {
-      timeout = setTimeout(() => setShowToast(false), 4000);
+      timeout = setTimeout(() => setShowToast(false), 2500);
     }
     return () => clearTimeout(timeout);
   }, [showToast]);
